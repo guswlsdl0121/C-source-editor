@@ -1,0 +1,50 @@
+package View;
+// 다중 찾기 뷰
+
+import Controller.EditController;
+
+import javax.swing.*;
+import java.awt.*;
+
+
+public class SearchAllView extends JFrame
+{
+    public JTextField tf1;
+    public JButton bt1;
+    public JButton bt2;
+
+    public EditController ed;
+
+    public SearchAllView()
+    {
+
+        setLayout(null);
+        tf1 = new JTextField();
+        bt1 = new JButton();
+        bt2 = new JButton();
+
+        setTitle("다중 찾기");
+        setSize(387, 135);
+        setLocation(600, 400);
+        setResizable(false);
+
+        Container container = getContentPane();
+        container.setLayout(null);
+        tf1.setBounds(10, 30, 200, 30);
+        bt1.setBounds(260, 30, 110, 30);
+
+        bt1.setText("다중 찾기");
+
+
+        container.add(tf1);
+        container.add(bt1);
+        container.add(bt2);
+
+        bt1.addActionListener(new EditController.MyActionListener());
+        bt2.addActionListener(new EditController.MyActionListener());
+        setVisible(true);
+
+    }
+
+}
+
