@@ -12,6 +12,8 @@ import javax.swing.*;
 import javax.swing.undo.UndoManager;
 
 
+
+
 public class MainView extends JFrame {
     private JFrame fce = new JFrame();
     public static JTextPane textPane = new JTextPane();
@@ -67,20 +69,44 @@ public class MainView extends JFrame {
 
         JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
         Edit_Menu.add(Edit_Menu_search_Item);
+        Edit_Menu_search_Item.addActionListener(new SearchViewEv());
 
         JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
         Edit_Menu.add(Edit_Menu_ALLsearch_Item);
+        Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
 
         JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
         Edit_Menu.add(Edit_Menu_change_Item);
+        Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
 
         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
         Edit_Menu.add(Edit_Menu_ALLchange_Item);
+        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
 
         st.start();
 
     }
+    class SearchViewEv implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SearchView searchView = new SearchView();
+        }
+    }
+    class SearchAllViewEv implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SearchAllView searchAllView = new SearchAllView();
 
+        }
+    }
+    class ChangeViewEv implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            ChangeView changeView = new ChangeView();
+        }
+    }
+    class ChangeAllViewEv implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            ChangeAllView changeAllView = new ChangeAllView();
+        }
+    }
 
     class StatusThread extends Thread {
         public void run() {
