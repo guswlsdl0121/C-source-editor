@@ -14,7 +14,7 @@ import javax.swing.undo.UndoManager;
 
 public class MainView extends JFrame {
     private JFrame fce = new JFrame();
-    static JTextPane textPane = new JTextPane();
+    public static JTextPane textPane = new JTextPane();
 
     private Highlighter h = textPane.getHighlighter();
 
