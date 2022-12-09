@@ -2,18 +2,29 @@ package Controller;
 import View.MainView;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.Document;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class FileController extends JFrame implements ActionListener{
+public class FileController extends JFrame implements ActionListener, UndoableEditListener {
     private final JTextPane pane = MainView.textPane;
     private String SavePathName = null;
+
+    //Undo, Redo 구현하기 위한 속성
+    UndoManager undoManager = new UndoManager();
+    Document document = pane.getDocument();
+
+    public FileController(){
+        //document에 UndoableEditListener붙여줌.
+        document.addUndoableEditListener(this);
+    }
 
     public void fileLoad(String path) throws BadLocationException {
         InputStreamReader reader = null;
@@ -75,10 +86,11 @@ public class FileController extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         //메모장 나가기
         if (Objects.equals(e.getActionCommand(), "ExitFile   Ctrl+Q")) {
+            System.out.println("exit");
             System.exit(0);
         }
         //파일 새로 생성
-        else if (Objects.equals(e.getActionCommand(), "NewFile    Ctrl+N") && !pane.getText().equals("")) {
+        if (Objects.equals(e.getActionCommand(), "NewFile    Ctrl+N") && !pane.getText().equals("")) {
             int option = JOptionPane.showConfirmDialog(null, "현재 내용을 저장 하시겠습니까?", "New", JOptionPane.YES_NO_CANCEL_OPTION);
             //OK를 누르면 SaveFile실행
             if (option == JOptionPane.OK_OPTION) {
@@ -91,7 +103,7 @@ public class FileController extends JFrame implements ActionListener{
                 pane.setText("");
         }
         //파일 불러오기
-        else if (Objects.equals(e.getActionCommand(), "LoadFile   Ctrl+O")) {
+        if (Objects.equals(e.getActionCommand(), "LoadFile   Ctrl+O")) {
             if (!pane.getText().equals("")) {
                 int option = JOptionPane.showConfirmDialog(null, "현재 내용을 저장 하시겠습니까?", "fileLoad", JOptionPane.YES_NO_CANCEL_OPTION);
                 //OK누르면 SaveFile실행
@@ -116,7 +128,7 @@ public class FileController extends JFrame implements ActionListener{
                     e1.printStackTrace();
                 }
         }
-        else if (Objects.equals(e.getActionCommand(), "SaveFile   Ctrl+S")) {
+        if (Objects.equals(e.getActionCommand(), "SaveFile   Ctrl+S")) {
             FileDialog fileDialog = new FileDialog(this, "파일 저장하기", FileDialog.SAVE);
             fileDialog.setDirectory(".");
             fileDialog.setVisible(true);
@@ -127,6 +139,11 @@ public class FileController extends JFrame implements ActionListener{
             }
             new AutoSave(SavePathName);
         }
+    }
+
+    @Override
+    public void undoableEditHappened(UndoableEditEvent e) {
+        undoManager.addEdit(e.getEdit());
     }
 
     class AutoSave implements Runnable {
@@ -153,7 +170,7 @@ public class FileController extends JFrame implements ActionListener{
         }
     }
 
-    public class HotkeyListener extends KeyAdapter {
+    public class FileHotkeyListener extends KeyAdapter {
         public void keyPressed(KeyEvent e) {
             if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
                 if (SavePathName == null) {
@@ -174,6 +191,15 @@ public class FileController extends JFrame implements ActionListener{
             else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
                 System.exit(0);
             }
+            else if (e.isShiftDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) {
+                if(undoManager.canRedo())
+                    undoManager.redo();
+            }
+            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z){
+                if(undoManager.canUndo())
+                    undoManager.undo();
+            }
+            
         }
     }
 }

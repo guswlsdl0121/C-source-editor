@@ -4,8 +4,12 @@ import Controller.FileController;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.*;
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 
 
 public class MainView extends JFrame {
@@ -15,10 +19,10 @@ public class MainView extends JFrame {
 
     private final JLabel la = new JLabel("");
     private final JLabel la2 = new JLabel("");
-
     public MainView() {
         setLayout(null);
         JFrame jFrame = new JFrame();
+
         jFrame.setTitle("C 소스 편집기");
         jFrame.setSize(1080, 720);
         jFrame.setLocation(100, 50);
@@ -66,9 +70,9 @@ public class MainView extends JFrame {
         loadItem.addActionListener(fc);
         saveItem.addActionListener(fc);
         exitItem.addActionListener(fc);
-        
+
         //파일 메뉴 단축키 리스너 등록
-        textPane.addKeyListener(fc.new HotkeyListener());
+        textPane.addKeyListener(fc.new FileHotkeyListener());
 
 
 
@@ -92,6 +96,7 @@ public class MainView extends JFrame {
         st.start();
 
     }
+
     class SearchViewEv implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             SearchView searchView = new SearchView();
