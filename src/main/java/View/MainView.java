@@ -114,6 +114,7 @@ public class MainView extends JFrame {
         Edit_Menu_change_Item.addActionListener(ed);
         Edit_Menu_ALLchange_Item.addActionListener(ed);
 
+
         StatusThread st = new StatusThread();
         st.start();
 

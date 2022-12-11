@@ -40,4 +40,5 @@ public class SearchView extends JFrame {
         this.bt2.addActionListener(new EditController.MyActionListener());
         this.setVisible(true);
     }
+
 }

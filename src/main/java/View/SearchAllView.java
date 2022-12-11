@@ -33,7 +33,6 @@ public class SearchAllView extends JFrame
 
         bt1.setText("다중 찾기");
 
-
         container.add(tf1);
         container.add(bt1);
 

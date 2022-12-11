@@ -19,7 +19,7 @@ public class EditView extends JFrame {
     public JButton bt2;
     public JButton bt3;
     public JButton bt4;
-
+    
     public EditView() {
         this.setLayout((LayoutManager)null);
         this.tf1 = new JTextField();

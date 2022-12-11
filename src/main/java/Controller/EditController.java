@@ -33,6 +33,7 @@ public class EditController extends JFrame implements ActionListener {
     private static EditView EditView;
     private static ChangeView ChangeView;
     private static ChangeAllView ChangeAllView;
+
     private static SearchAllView SearchAllView;
 
 

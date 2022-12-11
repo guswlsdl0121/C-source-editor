@@ -12,8 +12,6 @@ public class ChangeView extends JFrame
     public JTextField tf1;
     public JButton bt1;
 
-    public EditController ed;
-
     public ChangeView()
     {
 

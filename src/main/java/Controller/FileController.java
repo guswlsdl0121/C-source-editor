@@ -31,6 +31,7 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
         FileInputStream inputStream = null;
         BufferedReader bufferedReader = null;
 
+
         try {
             inputStream = new FileInputStream(path);
             reader = new InputStreamReader(inputStream);
