@@ -1,5 +1,6 @@
 package View;
 
+import Controller.EditController;
 import Controller.FileController;
 
 import java.awt.*;
@@ -74,50 +75,71 @@ public class MainView extends JFrame {
         //파일 메뉴 단축키 리스너 등록
         textPane.addKeyListener(fc.new FileHotkeyListener());
 
+        //에딧메뉴 단축키 리스너 등록
+        textPane.addKeyListener(new EditController.MykeyListener());
 
+        EditController ed = new EditController();
+
+
+//        JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
+//        editMenu.add(Edit_Menu_search_Item);
+//        Edit_Menu_search_Item.addActionListener(new SearchViewEv());
+//
+//        JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
+//        editMenu.add(Edit_Menu_ALLsearch_Item);
+//        Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
+//
+//        JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
+//        editMenu.add(Edit_Menu_change_Item);
+//        Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
+//
+//        JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
+//        editMenu.add(Edit_Menu_ALLchange_Item);
+//        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
 
         JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
         editMenu.add(Edit_Menu_search_Item);
-        Edit_Menu_search_Item.addActionListener(new SearchViewEv());
 
         JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
         editMenu.add(Edit_Menu_ALLsearch_Item);
-        Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
 
         JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
         editMenu.add(Edit_Menu_change_Item);
-        Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
 
         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
         editMenu.add(Edit_Menu_ALLchange_Item);
-        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
+
+        Edit_Menu_search_Item.addActionListener(ed);
+        Edit_Menu_ALLsearch_Item.addActionListener(ed);
+        Edit_Menu_change_Item.addActionListener(ed);
+        Edit_Menu_ALLchange_Item.addActionListener(ed);
 
         StatusThread st = new StatusThread();
         st.start();
 
     }
 
-    class SearchViewEv implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            SearchView searchView = new SearchView();
-        }
-    }
-    class SearchAllViewEv implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            SearchAllView searchAllView = new SearchAllView();
-
-        }
-    }
-    class ChangeViewEv implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            ChangeView changeView = new ChangeView();
-        }
-    }
-    class ChangeAllViewEv implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            ChangeAllView changeAllView = new ChangeAllView();
-        }
-    }
+//    class SearchViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            SearchView searchView = new SearchView();
+//        }
+//    }
+//    class SearchAllViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            SearchAllView searchAllView = new SearchAllView();
+//
+//        }
+//    }
+//    class ChangeViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            ChangeView changeView = new ChangeView();
+//        }
+//    }
+//    class ChangeAllViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            ChangeAllView changeAllView = new ChangeAllView();
+//        }
+//    }
 
     class StatusThread extends Thread {
         public void run() {

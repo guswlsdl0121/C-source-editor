@@ -5,10 +5,8 @@
 
 package Controller;
 
-import View.EditView;
-import View.MainView;
-import View.SearchView;
-import java.awt.Component;
+import View.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -22,26 +20,77 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
+/**
+ * EditMenu 와 SearchMenu 의 처리를 위한 컨트롤러 class
+ *
+ * @author 김현진
+ * @version 1.0
+ * @see JFrame
+ * @see ActionListener
+ */
 public class EditController extends JFrame implements ActionListener {
     private static SearchView SearchView;
     private static EditView EditView;
+    private static ChangeView ChangeView;
+    private static ChangeAllView ChangeAllView;
+    private static SearchAllView SearchAllView;
 
-    public EditController() {
-    }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Search   Ctrl+F")) {
+    /**
+     * Edit-Menu 버튼을 눌렀을 때 생기는 이벤트 처리
+     * @author 김현진
+     * @see ActionEvent
+     */
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getActionCommand().equals("Search   Ctrl+F"))
+        {
+            //edit=new Edit_View();
             SearchView = new SearchView();
-        } else if (e.getActionCommand().equals("searchALL   Ctrl+G")) {
-            SearchView = new SearchView();
-        } else if (e.getActionCommand().equals("Change   Ctrl+R")) {
-            EditView = new EditView();
-        } else if (e.getActionCommand().equals("ChangeALl   Ctrl+T")) {
-            EditView = new EditView();
         }
-
+        else if (e.getActionCommand().equals("searchALL   Ctrl+G"))
+        {
+            SearchAllView =new SearchAllView();
+        }
+        else if (e.getActionCommand().equals("Change   Ctrl+R"))
+        {
+            ChangeView = new ChangeView();
+        }
+        else if (e.getActionCommand().equals("ChangeALl   Ctrl+T"))
+        {
+            ChangeAllView = new ChangeAllView();
+        }
     }
 
+    /**
+     * 단축키 입력 이벤트를 처리하는 클래스
+     * @implNote  ex) VK_F => ctrl F를 뜻합니당
+     * @author 김현진
+     * @version 1.1
+     * @see java.awt.event.KeyAdapter
+     * @see java.awt.event.KeyEvent
+     */
+    public static class MykeyListener extends KeyAdapter {
+        public void keyPressed(KeyEvent e) {
+            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_F) {
+                SearchView = new SearchView();
+            } else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_G) {
+                SearchAllView = new SearchAllView();
+            } else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_R) {
+                ChangeView = new ChangeView();
+            } else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_T) {
+                ChangeAllView = new ChangeAllView();
+            }
+
+        }
+    }
+
+    /**
+     * searchView, editView 내부 버튼 액션에 해당하는 클래스
+     * @implNote  issue - 밑에 서술하는 변수들에 static을 빼면 바꾸기 동작이 안 됨
+     * @version 1.1
+     * @author 김현진
+     */
     public static class MyActionListener implements ActionListener {
         private final JTextPane textPane;
         private final Highlighter text_highlight;
@@ -58,145 +107,143 @@ public class EditController extends JFrame implements ActionListener {
             this.text_highlight = this.textPane.getHighlighter();
         }
 
-        public void actionPerformed(ActionEvent e) {
+        /**
+         * 오버라이딩한 메소드. 그냥 눈으로 흘깃 보세요..
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
             int fi = 0;
+            int max;
             JButton currentButton = (JButton)e.getSource();
-            if (!currentButton.getText().equals("찾기") && !currentButton.getText().equals("단일 선택")) {
-                if (!currentButton.getText().equals("모두 찾기") && !currentButton.getText().equals("모두 선택")) {
-                    if (currentButton.getText().equals("바꾸기")) {
-                        if (word_count != 0) {
-                            conversion_word = EditController.EditView.tf2.getText();
-                            if (count == 1) {
-                                this.textPane.select(last_offset - find_text.length(), last_offset);
-                                this.textPane.replaceSelection(conversion_word);
 
-                                try {
-                                    this.text_highlight.addHighlight(last_offset - find_text.length(), last_offset - find_text.length() + conversion_word.length(), DefaultHighlighter.DefaultPainter);
-                                } catch (BadLocationException var13) {
-                                    var13.printStackTrace();
-                                }
+            if(currentButton.getText().equals("찾기"))
+            {
+                text_highlight.removeAllHighlights();
+                viewText = textPane.getText().replace("\r\n", "\n");
+                find_text = SearchView.tf1.getText();
 
-                                count = 0;
-                            } else {
-                                this.textPane.select(offset - find_text.length(), offset);
-                                this.textPane.replaceSelection(conversion_word);
 
-                                try {
-                                    this.text_highlight.addHighlight(offset - find_text.length(), offset - find_text.length() + conversion_word.length(), DefaultHighlighter.DefaultPainter);
-                                } catch (BadLocationException var12) {
-                                    var12.printStackTrace();
-                                }
-                            }
-                        }
-
-                        word_count = 0;
-                    } else if (currentButton.getText().equals("모두 바꾸기")) {
-                        int cpos = 0;
-                        conversion_word = EditController.EditView.tf2.getText();
-                        String cur = this.textPane.getText();
-                        String after = cur.replaceAll(find_text, conversion_word);
-                        this.textPane.selectAll();
-                        this.textPane.replaceSelection(after);
-                        int max2 = after.lastIndexOf(conversion_word);
-
-                        for(int k = 0; k < after.length(); ++k) {
-                            cpos = after.indexOf(conversion_word, cpos);
-
-                            try {
-                                this.text_highlight.addHighlight(cpos, cpos + conversion_word.length(), DefaultHighlighter.DefaultPainter);
-                            } catch (BadLocationException var11) {
-                            }
-
-                            cpos += conversion_word.length();
-                            if (cpos >= max2) {
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    this.text_highlight.removeAllHighlights();
-                    viewText = this.textPane.getText().replace("\r\n", "\n");
-                    if (currentButton.getText().equals("모두 찾기")) {
-                        find_text = EditController.SearchView.tf1.getText();
-                    } else if (currentButton.getText().equals("모두 선택")) {
-                        find_text = EditController.EditView.tf1.getText();
-                    }
-
-                    new StringTokenizer(viewText, " \t\r\n");
-                    if (viewText.contains(find_text)) {
-                        int max = viewText.lastIndexOf(find_text);
-                        int k = 0;
-
-                        while(true) {
-                            fi = viewText.indexOf(find_text, fi);
-
-                            try {
-                                this.text_highlight.addHighlight(fi, fi + find_text.length(), DefaultHighlighter.DefaultPainter);
-                            } catch (BadLocationException var14) {
-                                var14.printStackTrace();
-                            }
-
-                            fi += find_text.length();
-                            if (fi >= max) {
-                                break;
-                            }
-
-                            ++k;
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog((Component)null, "더 이상  찾는 단어가 없습니다.", "message", 2);
-                    }
-                }
-            } else {
-                this.text_highlight.removeAllHighlights();
-                viewText = this.textPane.getText().replace("\r\n", "\n");
-                if (currentButton.getText().equals("찾기")) {
-                    find_text = EditController.SearchView.tf1.getText();
-                } else if (currentButton.getText().equals("단일 선택")) {
-                    find_text = EditController.EditView.tf1.getText();
-                }
-
-                if (viewText.contains(find_text)) {
+                if(viewText.contains(find_text))
+                {
                     word_count = 1;
                     offset = viewText.indexOf(find_text, offset);
                     count = 0;
-
-                    try {
-                        this.text_highlight.addHighlight(offset, offset + find_text.length(), DefaultHighlighter.DefaultPainter);
-                    } catch (BadLocationException var15) {
-                        var15.printStackTrace();
+                    try
+                    {
+                        text_highlight.addHighlight(offset, offset + find_text.length(), DefaultHighlighter.DefaultPainter);
                     }
+                    catch (BadLocationException CanNotSearch)
+                    {
+                        CanNotSearch.printStackTrace();
+                    }
+                    offset = offset + find_text.length();
 
-                    offset += find_text.length();
-                    if (offset > viewText.lastIndexOf(find_text)) {
+                    if(offset > viewText.lastIndexOf(find_text))
+                    {
                         last_offset = offset;
                         count = 1;
                         offset = 0;
                     }
-                } else {
-                    word_count = 0;
-                    JOptionPane.showMessageDialog((Component)null, "더 이상  찾는 단어가 없습니다.", "message", 2);
+                }
+                else
+                {
+                    word_count=0;
+                    JOptionPane.showMessageDialog(null, "더 이상  찾는 단어가 없습니다.", "message", JOptionPane.WARNING_MESSAGE);
                 }
             }
+            else if(currentButton.getText().equals("모두 찾기") || currentButton.getText().equals("다중 찾기"))
+            {
+                text_highlight.removeAllHighlights();
+                viewText = textPane.getText().replace("\r\n", "\n");
 
-        }
-    }
+                if(currentButton.getText().equals("모두 찾기"))
+                {
+                    find_text = SearchView.tf1.getText();
+                }
+                else if(currentButton.getText().equals("다중 찾기"))
+                {
+                    find_text = SearchAllView.tf1.getText();
+                }
 
-    static class MykeyListener extends KeyAdapter {
-        MykeyListener() {
-        }
-
-        public void keyPressed(KeyEvent e) {
-            if (e.isControlDown() && e.getKeyCode() == 70) {
-                EditController.SearchView = new SearchView();
-            } else if (e.isControlDown() && e.getKeyCode() == 71) {
-                EditController.SearchView = new SearchView();
-            } else if (e.isControlDown() && e.getKeyCode() == 82) {
-                EditController.EditView = new EditView();
-            } else if (e.isControlDown() && e.getKeyCode() == 84) {
-                EditController.EditView = new EditView();
+                StringTokenizer st = new StringTokenizer(viewText, "\u0020\t\r\n");
+                if(viewText.contains(find_text))
+                {
+                    max = viewText.lastIndexOf(find_text);
+                    for(int k=0; ; k++)
+                    {
+                        fi = viewText.indexOf(find_text, fi);
+                        try
+                        {
+                            text_highlight.addHighlight(fi, fi+find_text.length(), DefaultHighlighter.DefaultPainter);
+                        }
+                        catch (BadLocationException CanNotSearch)
+                        {
+                            CanNotSearch.printStackTrace();
+                        }
+                        fi = fi + find_text.length();
+                        if(fi >= max) break;
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "더 이상  찾는 단어가 없습니다.", "message", JOptionPane.WARNING_MESSAGE);
+                }
             }
-
+            else if(currentButton.getText().equals("단일 바꾸기"))
+            {
+                if(word_count != 0)
+                {
+                    conversion_word = ChangeView.tf1.getText();
+                    if(count == 1)
+                    {
+                        textPane.select(last_offset-find_text.length(), last_offset);
+                        textPane.replaceSelection(conversion_word);
+                        try {
+                            text_highlight.addHighlight(last_offset - find_text.length(), last_offset - find_text.length() + conversion_word.length(), DefaultHighlighter.DefaultPainter);
+                        } catch (BadLocationException e1) {
+                            e1.printStackTrace();
+                        }
+                        count=0;
+                    }
+                    else
+                    {
+                        textPane.select(offset-find_text.length(), offset);
+                        textPane.replaceSelection(conversion_word);
+                        try {
+                            text_highlight.addHighlight(offset-find_text.length(), offset-find_text.length()+ conversion_word.length(), DefaultHighlighter.DefaultPainter);
+                        } catch (BadLocationException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+                word_count=0;
+            }
+            else if(currentButton.getText().equals("다중 바꾸기"))
+            {
+                int cpos=0;
+                String cur, after;
+                conversion_word = ChangeAllView.tf1.getText();
+                cur = textPane.getText();
+                after = cur.replaceAll(find_text, conversion_word);
+                textPane.selectAll();
+                textPane.replaceSelection(after);
+                int max2;
+                max2 = after.lastIndexOf(conversion_word);
+                for(int k=0; k<after.length(); k++)
+                {
+                    cpos = after.indexOf(conversion_word, cpos);
+                    try {
+                        text_highlight.addHighlight(cpos, cpos+ conversion_word.length(), DefaultHighlighter.DefaultPainter);
+                    } catch (BadLocationException ble) {
+                    }
+                    cpos = cpos+ conversion_word.length();
+                    if(cpos >= max2)
+                        break;
+                }
+            }
         }
     }
+
 }

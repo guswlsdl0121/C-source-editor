@@ -11,7 +11,6 @@ public class ChangeAllView extends JFrame
 {
     public JTextField tf1;
     public JButton bt1;
-    public JButton bt2;
 
     public EditController ed;
 
@@ -21,7 +20,6 @@ public class ChangeAllView extends JFrame
         setLayout(null);
         tf1 = new JTextField();
         bt1 = new JButton();
-        bt2 = new JButton();
 
         setTitle("다중 바꾸기");
         setSize(387, 135);
@@ -38,10 +36,8 @@ public class ChangeAllView extends JFrame
 
         container.add(tf1);
         container.add(bt1);
-        container.add(bt2);
 
         bt1.addActionListener(new EditController.MyActionListener());
-        bt2.addActionListener(new EditController.MyActionListener());
         setVisible(true);
 
     }
