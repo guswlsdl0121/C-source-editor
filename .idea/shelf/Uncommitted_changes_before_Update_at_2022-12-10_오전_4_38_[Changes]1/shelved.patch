@@ -1,0 +1,74 @@
+Index: src/main/java/Model/HeaderModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Model/HeaderModel.java b/src/main/java/Model/HeaderModel.java
+--- a/src/main/java/Model/HeaderModel.java	
++++ b/src/main/java/Model/HeaderModel.java	
+@@ -1,4 +1,11 @@
+ package Model;
+ 
+-public class HeaderModel {
++public class HeaderModel{
++    private String[] Header = {"<assert.h>", "<complex.h>", "<conio.h>", "<corecrt.h>", "<corecrt_io.h>", "<corecrt_malloc.h>", "<corecrt_math.h>", "<corecrt_math_defines.h>", "<corecrt_memcpy_s.h>", "<corecrt_memory.h>", "<corecrt_search.h>", "<corecrt_share.h>", "<corecrt_startup.h>", "<corecrt_stdio_config.h>", "<corecrt_terminate.h>", "<corecrt_wconio.h>", "<corecrt_wctype.h>", "<corecrt_wdirect.h>", "<corecrt_wio.h>", "<corecrt_wprocess.h>", "<corecrt_wstdio.h>", "<corecrt_wstdlib.h>", "<corecrt_wstring.h>", "<corecrt_wtime.h>", "<crtdbg.h>", "<ctype.h>", "<direct.h>", "<dos.h>", "<errno.h>", "<fcntl.h>", "<fenv.h>", "<float.h>", "<fpieee.h>", "<inttypes.h>", "<io.h>", "<locale.h>", "<malloc.h>", "<math.h>", "<mbctype.h>", "<mbstring.h>", "<memory.h>", "<minmax.h>", "<new.h>", "<process.h>", "<safeint.h>", "<safeint_internal.h>", "<search.h>", "<share.h>", "<signal.h>", "<stddef.h>", "<stdio.h>", "<stdlib.h>", "<string.h>", "<tchar.h>", "<tgmath.h>", "<time.h>", "<uchar.h>", "<wchar.h>", "<wctype.h>", "<locking.h>", "<stat.h>", "<timeb.h>", "<types.h>", "<utime.h>"};
++
++    public String[] getHeader()
++    {
++        return Header;
++    }
+ }
++
+Index: src/main/java/Model/KeywordModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Model/KeywordModel.java b/src/main/java/Model/KeywordModel.java
+--- a/src/main/java/Model/KeywordModel.java	
++++ b/src/main/java/Model/KeywordModel.java	
+@@ -1,4 +1,10 @@
+ package Model;
+ 
+ public class KeywordModel {
++    private String[] KeyWord = {"#include","#define","void", "struct","class","union", "enum","if","for","while","return","false","true","sizeof", "public","private","protected","else","typedef","#pragma", "fwrite","fread","warning","disable","do","static","default", "const","switch","case","break","continue","#undef","#if", "#elseif","#else","#endif","#ifndef","#ifdef","inline","extern", "#import","#using","#error","#line","once"};
++
++    public String[] getKeyword()
++    {
++        return KeyWord;
++    }
+ }
+Index: src/main/java/View/MainView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/View/MainView.java b/src/main/java/View/MainView.java
+--- a/src/main/java/View/MainView.java	
++++ b/src/main/java/View/MainView.java	
+@@ -1,5 +1,7 @@
+ package View;
+ 
++import Controller.InputController;
++
+ import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+@@ -21,6 +23,7 @@
+     private JLabel la = new JLabel("");
+     private JLabel la2 = new JLabel("");
+     private StatusThread st = new StatusThread();
++    private InputController ct1 = new InputController(textPane);
+ 
+     public MainView() {
+         setLayout(null);
+@@ -76,9 +79,6 @@
+ 
+         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
+         Edit_Menu.add(Edit_Menu_ALLchange_Item);
+-
+-        st.start();
+-
+     }
+ 
+ 

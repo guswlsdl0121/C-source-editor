@@ -1,0 +1,639 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,8 +6,11 @@
+   <component name="ChangeListManager">
+     <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainView.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -45,6 +48,7 @@
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "WebServerToolWindowFactoryState": "false",
++    "last_opened_file_path": "C:/Users/md8/IdeaProjects/C_source_editor",
+     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+   }
+ }]]></component>
+@@ -79,6 +83,13 @@
+       <option name="presentableId" value="Default" />
+       <updated>1670422749956</updated>
+       <workItem from="1670422751948" duration="1237000" />
++      <workItem from="1670424437825" duration="176000" />
++      <workItem from="1670424663427" duration="1845000" />
++      <workItem from="1670427835235" duration="17931000" />
++      <workItem from="1670470884782" duration="38000" />
++      <workItem from="1670499618300" duration="10911000" />
++      <workItem from="1670571058609" duration="1351000" />
++      <workItem from="1670607722978" duration="6823000" />
+     </task>
+     <servers />
+   </component>
+@@ -96,4 +107,18 @@
+       </map>
+     </option>
+   </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <breakpoint enabled="true" type="java-exception">
++          <properties class="java.lang.NullPointerException" package="java.lang" />
++          <option name="timeStamp" value="1" />
++        </breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
++  </component>
++  <component name="XSLT-Support.FileAssociations.UIState">
++    <expand />
++    <select />
++  </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/Controller/InputController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/InputController.java b/src/main/java/Controller/InputController.java
+--- a/src/main/java/Controller/InputController.java	
++++ b/src/main/java/Controller/InputController.java	
+@@ -1,4 +1,545 @@
+ package Controller;
+ 
+-public class InputController {
+-}
++import Model.HeaderModel;
++import Model.KeywordModel;
++import Model.DatatypeModel;
++
++import java.util.*;
++import java.awt.*;
++import javax.swing.JTextPane;
++import javax.swing.text.AttributeSet;
++import javax.swing.text.SimpleAttributeSet;
++import javax.swing.text.StyleConstants;
++import javax.swing.text.StyleContext;
++import javax.swing.text.StyledDocument;
++import java.util.Stack; //import
++public class InputController implements Runnable {
++    private final JTextPane UserText;
++    private String UserTextString;
++    private char[] UserTextCharacter;
++    private String[] UserTextCharacterIndex;
++    private ArrayList<String> UserTextWord;
++
++    private final String[] getKeyword;
++    private final String[] getHeader;
++    private final String[] getDatatype;
++
++    private final AttributeSet CyanColor;
++    private final AttributeSet BlackColor;
++    private final AttributeSet PinkColor;
++    private final AttributeSet RedColor;
++    private final AttributeSet ErrorColor;
++    private final AttributeSet MagentaColor;
++    private final AttributeSet BlueColor;
++    private final AttributeSet GreenColor;
++    private final AttributeSet OrangeColor;
++    public InputController(JTextPane text) {
++        KeywordModel KeyWord = new KeywordModel();
++        HeaderModel Header = new HeaderModel();
++        DatatypeModel Datatype = new DatatypeModel();
++        getKeyword = KeyWord.getKeyword();
++        getHeader = Header.getHeader();
++        getDatatype = Datatype.getDatatype();
++        this.UserText = text;
++        new Thread(this).start();
++        StyleContext context = new StyleContext();
++        PinkColor = context.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.PINK);
++        CyanColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.CYAN);
++        BlackColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.BLACK);
++        MagentaColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.MAGENTA);
++        BlueColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.BLUE);
++        RedColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.RED);
++        GreenColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.GREEN);
++        OrangeColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.ORANGE);
++        AttributeSet as_underline = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Underline, Boolean.TRUE);
++        ErrorColor = context.addAttributes(RedColor, as_underline);
++
++    }
++
++    @Override
++    public void run() {
++        while (true) {
++            UserTextString = UserText.getText().replace("\r\n", "\n");
++            StyledDocument userTextDocument = UserText.getStyledDocument();
++            UserTextCharacter = UserTextString.toCharArray();
++            UserTextCharacterIndex = new String[UserTextCharacter.length];
++            Arrays.fill(UserTextCharacterIndex, "");
++            UserTextWord = new ArrayList<String>();
++            StringTokenizer userTextTokenizer = new StringTokenizer(UserTextString, "\t|\r|\n|\u0020|\u00A0");
++            while (userTextTokenizer.hasMoreElements()) {
++                UserTextWord.add(userTextTokenizer.nextToken());
++            }
++            KeywordEdit();
++            IncludeEdit();
++            DefineEdit();
++            DateTypeEdit();
++            MarkEdit();
++            for (int ColorSetindex = 0; ColorSetindex < UserTextCharacter.length; ColorSetindex++) {
++                if (UserTextCharacterIndex[ColorSetindex].equals("CYAN"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, CyanColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("GREEN"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, GreenColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("ORANGE"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, OrangeColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("MAGENTA"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, MagentaColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("BLUE"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, BlueColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("PINK"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, PinkColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("RED"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, RedColor, true);
++                else if (UserTextCharacterIndex[ColorSetindex].equals("ERROR"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, ErrorColor, true);
++                else
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, BlackColor, true);
++            }
++        }
++    }
++
++    public void KeywordEdit() {
++        int KeyWordindex = 0;
++        String KeywordValue = null;
++        String ModelKeywordValue = null;
++        for (int Wordindex = 0; Wordindex < UserTextWord.size(); Wordindex++) {
++            for (int ModelKeywordindex = 0; ModelKeywordindex < getKeyword.length; ModelKeywordindex++) {
++                KeywordValue = UserTextWord.get(Wordindex);
++                ModelKeywordValue = getKeyword[ModelKeywordindex];
++                if (KeywordValue.equals(ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(ModelKeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals("(" + ModelKeywordValue) || KeywordValue.equals("{" + ModelKeywordValue) || KeywordValue.equals("[" + ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex + 1; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals(ModelKeywordValue + ")") || KeywordValue.equals(ModelKeywordValue + "}") || KeywordValue.equals(ModelKeywordValue + "]")) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals("(" + ModelKeywordValue + ")") || KeywordValue.equals("{" + ModelKeywordValue + "}") || KeywordValue.equals("[" + ModelKeywordValue + "]")) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex + 1; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.contains(ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                }
++            }
++        }
++    }
++
++    public void IncludeEdit() {
++        int Headerindex = 0;
++        for (int i = 0; i < UserTextWord.size(); i++) {
++            for (int j = 0; j < getHeader.length; j++) {
++                if (UserTextWord.get(i).equals("#include" + getHeader[j])) {
++                    Headerindex = UserTextString.indexOf(UserTextWord.get(i), Headerindex);
++                    Headerindex = Headerindex + "#include".length();
++                    for (int k = Headerindex; k < Headerindex + getHeader[j].length(); k++) {
++                        //System.out.println(k);
++                        UserTextCharacterIndex[k] = "PINK";
++                    }
++                    Headerindex = Headerindex + getHeader[i].length();
++                    //System.out.println("test1");
++                } else if (UserTextWord.get(i).contains("#include" + getHeader[j])) {
++                    Headerindex = UserTextString.indexOf(UserTextWord.get(i), Headerindex);
++                    Headerindex = Headerindex + UserTextWord.get(i).length();
++                    //System.out.println("test2");
++                } else if (i != 0 && UserTextWord.get(i - 1).equals("#include")) {
++                    if (UserTextWord.get(i).equals(getHeader[j])) {
++                        Headerindex = UserTextString.indexOf("#include", Headerindex);
++                        Headerindex = Headerindex + "#include".length();
++                        Headerindex = UserTextString.indexOf(getHeader[j], Headerindex);
++                        //System.out.println("test2"+Headerindex);
++                        for (int k = Headerindex; k < Headerindex + getHeader[j].length(); k++) {
++                            //System.out.println(k);
++                            UserTextCharacterIndex[k] = "PINK";
++                        }
++                        Headerindex = Headerindex + getHeader[i].length();
++                        //System.out.println("test3");
++                    } else if (UserTextWord.get(i).contains(getHeader[j])) {
++                        Headerindex = UserTextString.indexOf(UserTextWord.get(i), Headerindex);
++                        Headerindex = Headerindex + UserTextWord.get(i).length();
++                        //System.out.println("test4");
++                    }
++                }
++            }
++        }
++    }
++
++    public void DefineEdit() {
++        char Definecheck = ' ';
++        int Defineindex = 0;
++        String DefineValue = null;
++        int DefineValueindex = 0;
++        String SearchConstantValue = null;
++        for (int Wordindex = 1; Wordindex < UserTextWord.size(); Wordindex++) {
++            if (UserTextWord.get(Wordindex - 1).equals("#define")) {
++                Definecheck = UserTextWord.get(Wordindex).charAt(0);
++                DefineValue = UserTextWord.get(Wordindex);
++                Defineindex = UserTextString.indexOf("#define", Defineindex);
++                Defineindex = Defineindex + "#define".length();
++                Defineindex = UserTextString.indexOf(DefineValue, Defineindex);
++                if (!Character.isDigit(Definecheck) && Definecheck != '!' && Definecheck != '@' && Definecheck != '#' && Definecheck != '%' && Definecheck != '^' && Definecheck != '&' && Definecheck != '*' && Definecheck != '(' && Definecheck != ')') {
++                    for (int ConstantColor = Defineindex; ConstantColor < Defineindex + DefineValue.length(); ConstantColor++) {
++                        UserTextCharacterIndex[ConstantColor] = "MAGENTA";
++                        //System.out.println("test1:     "+ConstantColor);
++                    }
++                    Defineindex = Defineindex + DefineValue.length();
++                    DefineValueindex = Defineindex;
++                    for (int SearchConstant = Wordindex + 1; SearchConstant < UserTextWord.size(); SearchConstant++) {
++                        SearchConstantValue = UserTextWord.get(SearchConstant);
++                        if (SearchConstantValue.equals(DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex; SeachConstantColor < DefineValueindex + DefineValue.length(); SeachConstantColor++) {
++                                UserTextCharacterIndex[SeachConstantColor] = "MAGENTA";
++                                //System.out.println("test2:     "+h);
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals("(" + DefineValue) || SearchConstantValue.equals("{" + DefineValue) || SearchConstantValue.equals("[" + DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex + 1; SeachConstantColor < DefineValueindex + DefineValue.length() + 1; SeachConstantColor++) {
++                                UserTextCharacterIndex[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals(DefineValue + ")") || SearchConstantValue.equals(DefineValue + "}") || SearchConstantValue.equals(DefineValue + "]")) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex; SeachConstantColor < DefineValueindex + DefineValue.length(); SeachConstantColor++) {
++                                UserTextCharacterIndex[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals("(" + DefineValue + ")") || SearchConstantValue.equals("{" + DefineValue + "}") || SearchConstantValue.equals("[" + DefineValue + "]")) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex + 1; SeachConstantColor < DefineValueindex + DefineValue.length() + 1; SeachConstantColor++) {
++                                UserTextCharacterIndex[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.contains(DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        }
++                    }
++                } else {
++                    for (int j = Defineindex; j < UserTextCharacter.length; j++) {
++                        if (UserTextCharacter[j] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterIndex[j] = "ERROR";
++                    }
++                    Defineindex = Defineindex + DefineValue.length();
++                }
++            }
++        }
++    }
++
++
++    public void DateTypeEdit() {
++        String DataValue = null;
++        String ModelDataValue = null;
++        int Dataindex = 0;
++        for (int Wordindex = 0; Wordindex < UserTextWord.size(); Wordindex++) {
++            for (int ModelDataindex = 0; ModelDataindex < getDatatype.length; ModelDataindex++) {
++                DataValue = UserTextWord.get(Wordindex);
++                ModelDataValue = getDatatype[ModelDataindex];
++                if (DataValue.equals(ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(ModelDataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex; SeachKeyWordColor < Dataindex + ModelDataValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals("(" + ModelDataValue) || DataValue.equals("{" + ModelDataValue) || DataValue.equals("[" + ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex + 1; SeachKeyWordColor < Dataindex + ModelDataValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals(ModelDataValue + ")") || DataValue.equals(ModelDataValue + "}") || DataValue.equals(ModelDataValue + "]")) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex; SeachKeyWordColor < Dataindex + ModelDataValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals("(" + ModelDataValue + ")") || DataValue.equals("{" + ModelDataValue + "}") || DataValue.equals("[" + ModelDataValue + "]")) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex + 1; SeachKeyWordColor < Dataindex + ModelDataValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterIndex[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.contains(ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    Dataindex = Dataindex + DataValue.length();
++                }
++            }
++        }
++
++        char DataTypecheck = ' ';
++        int DataTypeindex = 0;
++        String DataTypeValue = null;
++        int DataTypeValueindex = 0;
++        String SearchDataValue = null;
++        String ModellDataTypeValue = null;
++        for (int Wordindex = 1; Wordindex < UserTextWord.size(); Wordindex++) {
++            if (!(Arrays.asList(getDatatype).contains(UserTextWord.get(Wordindex)))) {
++                //System.out.println("test1:     " + DataTypeindex);
++                if ((Arrays.asList(getDatatype).contains(UserTextWord.get(Wordindex - 1)))) {
++                    ModellDataTypeValue = UserTextWord.get(Wordindex - 1);
++                    DataTypecheck = UserTextWord.get(Wordindex).charAt(0);
++                    DataTypeValue = UserTextWord.get(Wordindex);
++                    DataTypeindex = UserTextString.indexOf(ModellDataTypeValue, DataTypeindex);
++                    DataTypeindex = DataTypeindex + ModellDataTypeValue.length();
++                    DataTypeindex = UserTextString.indexOf(DataTypeValue, DataTypeindex);
++                    //System.out.println("test2:     " + DataTypeindex);
++                    if (!Character.isDigit(DataTypecheck) && DataTypecheck != '!' && DataTypecheck != '@' && DataTypecheck != '#' && DataTypecheck != '%' && DataTypecheck != '^' && DataTypecheck != '&' && DataTypecheck != '*' && DataTypecheck != '(' && DataTypecheck != ')') {
++                        for (int ConstantColor = DataTypeindex; ConstantColor < DataTypeindex + DataTypeValue.length(); ConstantColor++) {
++                            UserTextCharacterIndex[ConstantColor] = "MAGENTA";
++                            //System.out.println("test1:     "+ConstantColor);
++                        }
++                        DataTypeindex = DataTypeindex + DataTypeValue.length();
++                        DataTypeValueindex = DataTypeindex;
++                        //System.out.println("test3:     " + DataTypeindex);
++                        for (int SearchConstant = Wordindex + 1; SearchConstant < UserTextWord.size(); SearchConstant++) {
++                            SearchDataValue = UserTextWord.get(SearchConstant);
++                            if (SearchDataValue.equals(DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length(); SeachDatatypeColor++) {
++                                    UserTextCharacterIndex[SeachDatatypeColor] = "MAGENTA";
++                                    //System.out.println("test2:     "+h);
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals("(" + DataTypeValue) || SearchDataValue.equals("{" + DataTypeValue) || SearchDataValue.equals("[" + DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex + 1; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length() + 1; SeachDatatypeColor++) {
++                                    UserTextCharacterIndex[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals(DataTypeValue + ")") || SearchDataValue.equals(DataTypeValue + "}") || SearchDataValue.equals(DataTypeValue + "]")) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length(); SeachDatatypeColor++) {
++                                    UserTextCharacterIndex[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals("(" + DataTypeValue + ")") || SearchDataValue.equals("{" + DataTypeValue + "}") || SearchDataValue.equals("[" + DataTypeValue + "]")) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex + 1; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length() + 1; SeachDatatypeColor++) {
++                                    UserTextCharacterIndex[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.contains(DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            }
++                        }
++                    } else {
++                        for (int j = DataTypeindex; j < UserTextCharacter.length; j++) {
++                            if (UserTextCharacter[j] == '\n') {
++                                break;
++                            }
++                            UserTextCharacterIndex[j] = "ERROR";
++                        }
++                        DataTypeindex = DataTypeindex + DataTypeValue.length();
++                        //System.out.println("test4:     " + DataTypeindex);
++                    }
++                }
++            }
++        }
++    }
++    public void MarkEdit() {
++        Stack<Character> MarkEditStack = new Stack<Character>(); //Char형 스택 선언
++        Stack<Integer> brackePosStack = new Stack<Integer>(); //Integer형 스택 선언
++        int OpenRemarkPos = 0;
++        int OpenQuotmarkPos = 0;
++        int OpenBracketPos = 0;
++        char BracketItem = ' ';
++        for (int characterIndex = 0; characterIndex < UserTextCharacter.length; characterIndex++) {
++            if (characterIndex != UserTextCharacter.length - 1) {
++                if (MarkEditStack.size() != 0) {
++                    if ((MarkEditStack.peek() != '"') && (MarkEditStack.peek() != '*') && (MarkEditStack.peek() != '+')) {
++                        if ((characterIndex + 1 < UserTextCharacter.length) && ((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                            MarkEditStack.push('+');
++                            for (int characterColor = characterIndex; characterColor < UserTextCharacter.length; characterColor++) {
++                                if (UserTextCharacter[characterColor] == '\n') {
++                                    break;
++                                }
++                                UserTextCharacterIndex[characterColor] = "GREEN";
++                            }
++                        }
++                        if ((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '*')) {
++                            MarkEditStack.push('*');
++                            OpenRemarkPos = characterIndex;
++                            for (int characterColor = characterIndex; characterColor < UserTextCharacter.length - 1; characterColor++) {
++                                if (UserTextCharacter[characterColor] == '*' && UserTextCharacter[characterColor + 1] == '/') {
++                                    break;
++                                } else {
++                                    UserTextCharacterIndex[characterColor] = "ERROR";
++                                    UserTextCharacterIndex[characterColor + 1] = "ERROR";
++                                }
++                            }
++                        }
++                        if (((UserTextCharacter[characterIndex] == '*') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                            UserTextCharacterIndex[characterIndex] = UserTextCharacterIndex[characterIndex + 1] = "ERROR";
++                        }
++                    }
++                    if ((UserTextCharacter[characterIndex] == '\n') && (MarkEditStack.peek()) == '+') {
++                        MarkEditStack.pop();
++                        continue;
++                    }
++                    if ((MarkEditStack.peek() == '*')) {
++                        if (UserTextCharacter[characterIndex] == '*' && UserTextCharacter[characterIndex + 1] == '/') {
++                            MarkEditStack.pop();
++                            for (int characterColor = OpenRemarkPos; characterColor < characterIndex + 2; characterColor++)
++                                UserTextCharacterIndex[characterColor] = "GREEN";
++                            continue;
++                        }
++                    }
++                } else {
++                    if (((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                        MarkEditStack.push('+');
++                        for (int characterColor = characterIndex; characterColor < UserTextCharacter.length; characterColor++) {
++                            if (UserTextCharacter[characterColor] == '\n') {
++                                break;
++                            }
++                            UserTextCharacterIndex[characterColor] = "GREEN";
++                        }
++                    }
++                    if (((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '*'))) {
++                        MarkEditStack.push('*');
++                        OpenRemarkPos = characterIndex;
++                        for (int characterColor = characterIndex; characterColor < UserTextCharacter.length - 1; characterColor++) {
++                            if (UserTextCharacter[characterColor] == '*' && UserTextCharacter[characterColor + 1] == '/') {
++                                break;
++                            } else {
++                                UserTextCharacterIndex[characterColor] = "ERROR";
++                                UserTextCharacterIndex[characterColor + 1] = "ERROR";
++                            }
++                        }
++                    }
++                    if (UserTextCharacter[characterIndex] == '*' && UserTextCharacter[characterIndex + 1] == '/') {
++                        UserTextCharacterIndex[characterIndex] = UserTextCharacterIndex[characterIndex + 1] = "ERROR";
++                    }
++                }
++                if (UserTextCharacter[characterIndex] == '\'' && UserTextCharacterIndex[characterIndex] != "ORANGE" && UserTextCharacterIndex[characterIndex] != "GREEN") {
++                    UserTextCharacterIndex[characterIndex] = "ERROR";
++                    if ((UserTextCharacter[characterIndex + 1] == '\'')) {
++                        UserTextCharacterIndex[characterIndex + 1] = UserTextCharacterIndex[characterIndex] = "ORANGE";
++                    } else if ((characterIndex != UserTextCharacter.length - 2) && UserTextCharacter[characterIndex + 2] == '\'') {
++                        UserTextCharacterIndex[characterIndex + 2] = UserTextCharacterIndex[characterIndex + 1] = UserTextCharacterIndex[characterIndex] = "ORANGE";
++                    }
++                }
++            }
++            if (MarkEditStack.size() != 0) {
++                if (UserTextCharacter[characterIndex] == '"' && !(MarkEditStack.contains('"')) && (MarkEditStack.peek() != '+') && (MarkEditStack.peek() != '*')) {
++                    MarkEditStack.push('"');
++                    OpenQuotmarkPos = characterIndex;
++                    UserTextCharacterIndex[characterIndex] = "ERROR";
++                    for (int characterColor = characterIndex + 1; characterColor < UserTextCharacter.length; characterColor++) {
++                        if (UserTextCharacter[characterColor] == '"' || UserTextCharacter[characterColor] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterIndex[characterColor] = "ERROR";
++                    }
++                }
++                if (MarkEditStack.peek() == '"') {
++                    //System.out.println(i);
++                    //System.out.println(OpenQuotmarkPos);
++                    if (UserTextCharacter[characterIndex] == '"' && characterIndex != OpenQuotmarkPos) {
++                        MarkEditStack.pop();
++                        for (int characterColor = OpenQuotmarkPos; characterColor < characterIndex + 1; characterColor++) {
++                            UserTextCharacterIndex[characterColor] = "ORANGE";
++                            //System.out.println("test4");
++                        }
++                        continue;
++                    } else if (UserTextCharacter[characterIndex] == '\n') {
++                        //System.out.println("test4");
++                        MarkEditStack.pop();
++                        continue;
++                    }
++                }
++            } else {
++                if (UserTextCharacter[characterIndex] == '"') {
++                    MarkEditStack.push('"');
++                    OpenQuotmarkPos = characterIndex;
++                    UserTextCharacterIndex[characterIndex] = "ERROR";
++                    for (int characterColor = characterIndex + 1; characterColor < UserTextCharacter.length; characterColor++) {
++                        if (UserTextCharacter[characterColor] == '"' || UserTextCharacter[characterColor] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterIndex[characterColor] = "ERROR";
++                    }
++                }
++            }
++            if (UserTextCharacter[characterIndex] == '{') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('{')) {
++                if ((MarkEditStack.peek() == '{') && (UserTextCharacter[characterIndex] == '}')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == '}') {
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == '}') {
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++
++            if (UserTextCharacter[characterIndex] == '[') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('[')) {
++                if ((MarkEditStack.peek() == '[') && (UserTextCharacter[characterIndex] == ']')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == ']') {
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == ']') {
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++
++            if (UserTextCharacter[characterIndex] == '(') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('(')) {
++                if ((MarkEditStack.peek() == '(') && (UserTextCharacter[characterIndex] == ')')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == ')') {
++                    UserTextCharacterIndex[brackePosStack.peek()] = UserTextCharacterIndex[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == ')') {
++                UserTextCharacterIndex[characterIndex] = "ERROR";
++            }
++        }
++    }
++}
++
++
++
++
++
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -1,9 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <option name="delegatedBuild" value="true" />
++        <option name="delegatedBuild" value="false" />
+         <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />

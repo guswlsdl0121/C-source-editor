@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="초기 세팅" />
+    <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="모델 및 인풋컨트롤러 구현">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10__10_44__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10__10_51__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10__4_38__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10__4_38__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10_오전_4_38_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10_오전_4_38_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10_오후_10_44_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-10_오후_10_51_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/DatatypeModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/ChangeAllView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/ChangeView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/SearchAllView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/SearchView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/EditView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/EditView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +66,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
@@ -75,6 +101,9 @@
       <option name="presentableId" value="Default" />
       <updated>1670422749956</updated>
       <workItem from="1670422751948" duration="1541000" />
+      <workItem from="1670680411788" duration="6414000" />
+      <workItem from="1670699816283" duration="85000" />
+      <workItem from="1670790330875" duration="2790000" />
     </task>
     <task id="LOCAL-00001" summary="초기 세팅">
       <created>1670424049024</created>
@@ -109,6 +138,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="초기 세팅" />
-    <option name="LAST_COMMIT_MESSAGE" value="초기 세팅" />
+    <MESSAGE value="모델 및 인풋컨트롤러 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="모델 및 인풋컨트롤러 구현" />
   </component>
 </project>
