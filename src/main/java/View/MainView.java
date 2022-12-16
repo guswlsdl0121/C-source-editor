@@ -72,14 +72,17 @@ public class MainView extends JFrame {
         saveItem.addActionListener(fc);
         exitItem.addActionListener(fc);
 
+
         //파일 메뉴 단축키 리스너 등록
         textPane.addKeyListener(fc.new FileHotkeyListener());
 
+
         //에딧메뉴 단축키 리스너 등록
         textPane.addKeyListener(new EditController.MykeyListener());
+        //하이라이트 처리 마우스 리스너 등록
+        textPane.addMouseListener(new EditController.MyMouseEvent());
 
         EditController ed = new EditController();
-
 
 //        JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
 //        editMenu.add(Edit_Menu_search_Item);
@@ -109,16 +112,24 @@ public class MainView extends JFrame {
         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
         editMenu.add(Edit_Menu_ALLchange_Item);
 
+        JMenuItem Edit_Menu_remove_Highlight_Item = new JMenuItem("remove highlight");
+        editMenu.add(Edit_Menu_remove_Highlight_Item);
+
         Edit_Menu_search_Item.addActionListener(ed);
         Edit_Menu_ALLsearch_Item.addActionListener(ed);
         Edit_Menu_change_Item.addActionListener(ed);
         Edit_Menu_ALLchange_Item.addActionListener(ed);
+        Edit_Menu_remove_Highlight_Item.addActionListener(ed);
 
 
         StatusThread st = new StatusThread();
         st.start();
 
     }
+
+
+
+
 
 //    class SearchViewEv implements ActionListener {
 //        public void actionPerformed(ActionEvent e) {

@@ -1,16 +1,9 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 package Controller;
 
 import View.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.StringTokenizer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +12,8 @@ import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
+
+
 
 /**
  * EditMenu 와 SearchMenu 의 처리를 위한 컨트롤러 class
@@ -35,6 +30,7 @@ public class EditController extends JFrame implements ActionListener {
     private static ChangeAllView ChangeAllView;
 
     private static SearchAllView SearchAllView;
+
 
 
     /**
@@ -61,7 +57,37 @@ public class EditController extends JFrame implements ActionListener {
         {
             ChangeAllView = new ChangeAllView();
         }
+        else if(e.getActionCommand().equals("remove highlight"))
+        {
+            MyActionListener.text_highlight.removeAllHighlights();
+        }
     }
+
+    /**
+     * 하이라이트의 마우스 클릭 처리만을 위한 클래스
+     * @author 김현진
+     * @implNote only for highlight
+     */
+    public static class MyMouseEvent implements MouseListener
+    {
+        //마우스가 해당 컴포넌트를 클릭했을때.
+        public void mouseClicked(MouseEvent e) throws NullPointerException
+        {
+            if(MyActionListener.text_highlight!= null)
+            {
+                MyActionListener.text_highlight.removeAllHighlights();
+            }
+            }
+        public void mouseEntered(MouseEvent e) { }
+
+        public void mouseExited(MouseEvent e) { }
+
+        public void mousePressed(MouseEvent e) { }
+
+        public void mouseReleased(MouseEvent e) { }
+    }
+
+
 
     /**
      * 단축키 입력 이벤트를 처리하는 클래스
@@ -86,15 +112,17 @@ public class EditController extends JFrame implements ActionListener {
         }
     }
 
+
     /**
      * searchView, editView 내부 버튼 액션에 해당하는 클래스
      * @implNote  issue - 밑에 서술하는 변수들에 static을 빼면 바꾸기 동작이 안 됨
      * @version 1.1
      * @author 김현진
      */
-    public static class MyActionListener implements ActionListener {
+    public static class MyActionListener implements ActionListener
+    {
         private final JTextPane textPane;
-        private final Highlighter text_highlight;
+        public static Highlighter text_highlight;
         private static int offset = 0;
         private static int last_offset = 0;
         private static String find_text;
@@ -103,7 +131,8 @@ public class EditController extends JFrame implements ActionListener {
         private static String conversion_word = "";
         private static String viewText;
 
-        public MyActionListener() {
+        public MyActionListener()
+        {
             this.textPane = MainView.textPane;
             this.text_highlight = this.textPane.getHighlighter();
         }
@@ -112,6 +141,7 @@ public class EditController extends JFrame implements ActionListener {
          * 오버라이딩한 메소드. 그냥 눈으로 흘깃 보세요..
          * @param e the event to be processed
          */
+
         @Override
         public void actionPerformed(ActionEvent e)
         {
@@ -124,7 +154,6 @@ public class EditController extends JFrame implements ActionListener {
                 text_highlight.removeAllHighlights();
                 viewText = textPane.getText().replace("\r\n", "\n");
                 find_text = SearchView.tf1.getText();
-
 
                 if(viewText.contains(find_text))
                 {
@@ -246,5 +275,8 @@ public class EditController extends JFrame implements ActionListener {
             }
         }
     }
+
+
+
 
 }
