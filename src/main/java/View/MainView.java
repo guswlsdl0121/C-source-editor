@@ -1,25 +1,37 @@
 package View;
 
+import Controller.FileController;
+import Controller.InputController;
+
 import Controller.EditController;
 import Controller.FileController;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Objects;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.*;
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
 
-
+/**
+ * 사용자로부터 텍스트를 입력받는 메모장 main class
+ *
+ * @author 안현진
+ * @version 1.0
+ * @see JFrame
+ */
 public class MainView extends JFrame {
     public static JTextPane textPane = new JTextPane();
-
-    private final Highlighter h = textPane.getHighlighter();
+    private final InputController ic = new InputController(textPane);
 
     private final JLabel la = new JLabel("");
     private final JLabel la2 = new JLabel("");
+    private final StatusThread st = new StatusThread();
+
     public MainView() {
         setLayout(null);
         JFrame jFrame = new JFrame();
@@ -62,7 +74,7 @@ public class MainView extends JFrame {
         JMenuItem saveItem = new JMenuItem("SaveFile   Ctrl+S");
         fileMenu.add(saveItem);
 
-        JMenuItem exitItem = new JMenuItem("ExitFile   Ctrl+Q");
+        JMenuItem exitItem = new JMenuItem("ExitFile     Ctrl+Q");
         fileMenu.add(exitItem);
 
         //파일 메뉴 액션 리스너 등록
@@ -75,6 +87,7 @@ public class MainView extends JFrame {
 
         //파일 메뉴 단축키 리스너 등록
         textPane.addKeyListener(fc.new FileHotkeyListener());
+//        textPane.addKeyListener(ic.new ThreadStopListener());
 
 
         //에딧메뉴 단축키 리스너 등록
@@ -100,13 +113,13 @@ public class MainView extends JFrame {
 //        editMenu.add(Edit_Menu_ALLchange_Item);
 //        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
 
-        JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
+        JMenuItem Edit_Menu_search_Item = new JMenuItem("Search          Ctrl+F");
         editMenu.add(Edit_Menu_search_Item);
 
         JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
         editMenu.add(Edit_Menu_ALLsearch_Item);
 
-        JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
+        JMenuItem Edit_Menu_change_Item = new JMenuItem("Change        Ctrl+R");
         editMenu.add(Edit_Menu_change_Item);
 
         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
@@ -152,7 +165,13 @@ public class MainView extends JFrame {
 //            ChangeAllView changeAllView = new ChangeAllView();
 //        }
 //    }
-
+    /**
+     * 행과 열을 출력하는 쓰레드
+     *
+     * @author 안현진
+     * @version 1.0
+     * @see Thread
+     */
     class StatusThread extends Thread {
         public void run() {
             while (true) {
