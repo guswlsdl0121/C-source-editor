@@ -1,4 +1,5 @@
 package Controller;
+import View.CompoundUndoManager;
 import View.MainView;
 
 import javax.swing.*;
@@ -7,24 +8,27 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.undo.UndoManager;
+//import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class FileController extends JFrame implements ActionListener, UndoableEditListener {
+public class FileController extends JFrame implements ActionListener /*,UndoableEditListener*/ {
     private final JTextPane pane = MainView.textPane;
     private String SavePathName = null;
 
-    //Undo, Redo 구현하기 위한 속성
-    UndoManager undoManager = new UndoManager();
-    Document document = pane.getDocument();
+    //Undo, Redo 구현하기 위한
+    //UndoManager undoManager = new UndoManager();
+    CompoundUndoManager undoManager = new CompoundUndoManager(pane);
 
-    public FileController(){
-        //document에 UndoableEditListener붙여줌.
-        document.addUndoableEditListener(this);
-    }
+//    Document document = pane.getDocument();
+//
+//    public FileController(){
+//        //document에 UndoableEditListener붙여줌.
+//        document.addUndoableEditListener(this);
+//    }
 
     public void fileLoad(String path) throws BadLocationException {
         InputStreamReader reader = null;
@@ -42,16 +46,13 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
             while ((str = bufferedReader.readLine()) != null)
                 data = data.concat(str + "\n");
             MainView.textPane.setText(data);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 assert inputStream != null;
                 inputStream.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -67,16 +68,13 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
                 fo.write(fs.nextToken().getBytes());
                 fo.write(("\r\n").getBytes());
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 assert fo != null;
                 fo.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -110,8 +108,7 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
                 if (option == JOptionPane.OK_OPTION) {
                     ActionEvent ae = new ActionEvent(new Object(), 0, "SaveFile   Ctrl+S");
                     this.actionPerformed(ae);
-                }
-                else if (option == JOptionPane.CANCEL_OPTION) {
+                } else if (option == JOptionPane.CANCEL_OPTION) {
                     return;
                 }
             }
@@ -123,8 +120,7 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
             if (loadPathName != null)
                 try {
                     fileLoad(loadPathName);
-                }
-                catch (BadLocationException e1) {
+                } catch (BadLocationException e1) {
                     e1.printStackTrace();
                 }
         }
@@ -141,10 +137,10 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
         }
     }
 
-    @Override
-    public void undoableEditHappened(UndoableEditEvent e) {
-        undoManager.addEdit(e.getEdit());
-    }
+//    @Override
+//    public void undoableEditHappened(UndoableEditEvent e) {
+//        undoManager.addEdit(e.getEdit());
+//    }
 
     class AutoSave implements Runnable {
         String autopath;
@@ -162,8 +158,7 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
                     }
                     Thread.sleep(10000);
                     fileSave(autopath);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     return;
                 }
             }
@@ -176,30 +171,30 @@ public class FileController extends JFrame implements ActionListener, UndoableEd
                 if (SavePathName == null) {
                     ActionEvent ae = new ActionEvent(new Object(), 0, "SaveFile   Ctrl+S");
                     actionPerformed(ae);
-                }
-                else
+                } else
                     fileSave(SavePathName);
             }
-            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_N) {
+            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_N) {
                 ActionEvent ae = new ActionEvent(new Object(), 0, "NewFile    Ctrl+N");
                 actionPerformed(ae);
             }
-            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
+            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
                 ActionEvent ae = new ActionEvent(new Object(), 0, "LoadFile   Ctrl+O");
                 actionPerformed(ae);
             }
-            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
+            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
                 System.exit(0);
             }
-            else if (e.isShiftDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) {
-                if(undoManager.canRedo())
-                    undoManager.redo();
+            if (e.isShiftDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) {
+//                if(undoManager.canRedo())
+//                    undoManager.redo();
+//            }
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) {
+//                if(undoManager.canUndo()){
+//                    undoManager.undo();
+//            }
+                }
             }
-            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z){
-                if(undoManager.canUndo())
-                    undoManager.undo();
-            }
-            
         }
     }
 }

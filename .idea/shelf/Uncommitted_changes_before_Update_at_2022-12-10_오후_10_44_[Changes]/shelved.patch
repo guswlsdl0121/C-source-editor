@@ -1,0 +1,1373 @@
+Index: src/main/java/Model/HeaderModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Model;\r\n\r\npublic class HeaderModel {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Model/HeaderModel.java b/src/main/java/Model/HeaderModel.java
+--- a/src/main/java/Model/HeaderModel.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/Model/HeaderModel.java	(date 1670614697800)
+@@ -1,4 +1,11 @@
+ package Model;
+ 
+-public class HeaderModel {
++public class HeaderModel{
++    private String[] Header = {"<assert.h>", "<complex.h>", "<conio.h>", "<corecrt.h>", "<corecrt_io.h>", "<corecrt_malloc.h>", "<corecrt_math.h>", "<corecrt_math_defines.h>", "<corecrt_memcpy_s.h>", "<corecrt_memory.h>", "<corecrt_search.h>", "<corecrt_share.h>", "<corecrt_startup.h>", "<corecrt_stdio_config.h>", "<corecrt_terminate.h>", "<corecrt_wconio.h>", "<corecrt_wctype.h>", "<corecrt_wdirect.h>", "<corecrt_wio.h>", "<corecrt_wprocess.h>", "<corecrt_wstdio.h>", "<corecrt_wstdlib.h>", "<corecrt_wstring.h>", "<corecrt_wtime.h>", "<crtdbg.h>", "<ctype.h>", "<direct.h>", "<dos.h>", "<errno.h>", "<fcntl.h>", "<fenv.h>", "<float.h>", "<fpieee.h>", "<inttypes.h>", "<io.h>", "<locale.h>", "<malloc.h>", "<math.h>", "<mbctype.h>", "<mbstring.h>", "<memory.h>", "<minmax.h>", "<new.h>", "<process.h>", "<safeint.h>", "<safeint_internal.h>", "<search.h>", "<share.h>", "<signal.h>", "<stddef.h>", "<stdio.h>", "<stdlib.h>", "<string.h>", "<tchar.h>", "<tgmath.h>", "<time.h>", "<uchar.h>", "<wchar.h>", "<wctype.h>", "<locking.h>", "<stat.h>", "<timeb.h>", "<types.h>", "<utime.h>"};
++
++    public String[] getHeader()
++    {
++        return Header;
++    }
+ }
++
+Index: src/main/java/Model/KeywordModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Model;\r\n\r\npublic class KeywordModel {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Model/KeywordModel.java b/src/main/java/Model/KeywordModel.java
+--- a/src/main/java/Model/KeywordModel.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/Model/KeywordModel.java	(date 1670614697807)
+@@ -1,4 +1,10 @@
+ package Model;
+ 
+ public class KeywordModel {
++    private String[] KeyWord = {"#include","#define","void", "struct","class","union", "enum","if","for","while","return","false","true","sizeof", "public","private","protected","else","typedef","#pragma", "fwrite","fread","warning","disable","do","static","default", "const","switch","case","break","continue","#undef","#if", "#elseif","#else","#endif","#ifndef","#ifdef","inline","extern", "#import","#using","#error","#line","once"};
++
++    public String[] getKeyword()
++    {
++        return KeyWord;
++    }
+ }
+Index: src/main/java/View/EditView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\npublic class EditView {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/View/EditView.java b/src/main/java/View/EditView.java
+--- a/src/main/java/View/EditView.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/View/EditView.java	(date 1670616092866)
+@@ -1,4 +1,54 @@
+ package View;
+ 
+-public class EditView {
+-}
++import Controller.EditController;
++import java.awt.Container;
++import java.awt.LayoutManager;
++import javax.swing.JButton;
++import javax.swing.JFrame;
++import javax.swing.JTextField;
++
++public class EditView extends JFrame {
++    public JTextField tf1;
++    public JTextField tf2;
++    public JButton bt1;
++    public JButton bt2;
++    public JButton bt3;
++    public JButton bt4;
++
++    public EditView() {
++        this.setLayout((LayoutManager)null);
++        this.tf1 = new JTextField();
++        this.tf2 = new JTextField();
++        this.bt1 = new JButton();
++        this.bt2 = new JButton();
++        this.bt3 = new JButton();
++        this.bt4 = new JButton();
++        this.setTitle("바꾸기");
++        this.setSize(387, 135);
++        this.setLocation(600, 400);
++        this.setResizable(false);
++        Container container = this.getContentPane();
++        container.setLayout((LayoutManager)null);
++        this.tf1.setBounds(10, 15, 150, 30);
++        this.tf2.setBounds(10, 60, 150, 30);
++        this.bt1.setBounds(260, 15, 110, 30);
++        this.bt2.setBounds(260, 60, 110, 30);
++        this.bt3.setBounds(165, 15, 90, 30);
++        this.bt4.setBounds(165, 60, 90, 30);
++        this.bt1.setText("모두 선택");
++        this.bt2.setText("모두 바꾸기");
++        this.bt3.setText("단일 선택");
++        this.bt4.setText("바꾸기");
++        container.add(this.tf1);
++        container.add(this.tf2);
++        container.add(this.bt1);
++        container.add(this.bt2);
++        container.add(this.bt3);
++        container.add(this.bt4);
++        this.bt1.addActionListener(new EditController.MyActionListener());
++        this.bt2.addActionListener(new EditController.MyActionListener());
++        this.bt3.addActionListener(new EditController.MyActionListener());
++        this.bt4.addActionListener(new EditController.MyActionListener());
++        this.setVisible(true);
++    }
++}
+\ No newline at end of file
+Index: src/main/java/View/MainView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.awt.event.KeyAdapter;\r\nimport java.awt.event.KeyEvent;\r\nimport javax.swing.event.UndoableEditEvent;\r\nimport javax.swing.event.UndoableEditListener;\r\nimport javax.swing.text.*;\r\nimport javax.swing.*;\r\nimport javax.swing.undo.UndoManager;\r\n\r\n\r\npublic class MainView extends JFrame {\r\n    private JFrame fce = new JFrame();\r\n    static JTextPane textPane = new JTextPane();\r\n\r\n    private Highlighter h = textPane.getHighlighter();\r\n\r\n    private JLabel la = new JLabel(\"\");\r\n    private JLabel la2 = new JLabel(\"\");\r\n    private StatusThread st = new StatusThread();\r\n\r\n    public MainView() {\r\n        setLayout(null);\r\n        fce.setTitle(\"C 소스 편집기\");\r\n        fce.setSize(1080, 720);\r\n        fce.setLocation(100, 50);\r\n        fce.setDefaultCloseOperation(fce.EXIT_ON_CLOSE);\r\n        Container c = fce.getContentPane();\r\n        c.setLayout(null);\r\n        JScrollPane scrollPane = new JScrollPane(textPane);\r\n        scrollPane.setSize(800, 500);\r\n        scrollPane.setLocation(10, 10);\r\n        c.add(scrollPane);\r\n        la.setSize(860, 20);\r\n        la.setLocation(10, 525);\r\n        c.add(la);\r\n\r\n        la2.setSize(860, 20);\r\n        la2.setLocation(10, 625);\r\n        c.add(la2);\r\n\r\n        JMenuBar menuBar = new JMenuBar();\r\n        fce.setJMenuBar(menuBar);\r\n\r\n        JMenu menu1 = new JMenu(\"File\");\r\n        menuBar.add(menu1);\r\n\r\n        JMenu Edit_Menu = new JMenu(\"Edit\");\r\n        menuBar.add(Edit_Menu);\r\n\r\n        fce.setVisible(true);\r\n\r\n        JMenuItem menu1Item = new JMenuItem(\"NewFile   Ctrl+N\");\r\n        menu1.add(menu1Item);\r\n\r\n        JMenuItem menu2Item = new JMenuItem(\"LoadFile   Ctrl+O\");\r\n        menu1.add(menu2Item);\r\n\r\n        JMenuItem menu3Item = new JMenuItem(\"SaveFile   Ctrl+S\");\r\n        menu1.add(menu3Item);\r\n\r\n        JMenuItem menu4Item = new JMenuItem(\"ExitFile   Ctrl+Q\");\r\n        menu1.add(menu4Item);\r\n\r\n        JMenuItem Edit_Menu_search_Item = new JMenuItem(\"Search   Ctrl+F\");\r\n        Edit_Menu.add(Edit_Menu_search_Item);\r\n\r\n        JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem(\"searchALL   Ctrl+G\");\r\n        Edit_Menu.add(Edit_Menu_ALLsearch_Item);\r\n\r\n        JMenuItem Edit_Menu_change_Item = new JMenuItem(\"Change   Ctrl+R\");\r\n        Edit_Menu.add(Edit_Menu_change_Item);\r\n\r\n        JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem(\"ChangeALl   Ctrl+T\");\r\n        Edit_Menu.add(Edit_Menu_ALLchange_Item);\r\n\r\n        st.start();\r\n\r\n    }\r\n\r\n\r\n    class StatusThread extends Thread {\r\n        public void run() {\r\n            while (true) {\r\n                char[] c = textPane.getText().replace(\"\\r\\n\", \"\\n\").toCharArray();\r\n                int row = 1;\r\n                int col = 0;\r\n                for (int i = 0; i < textPane.getCaretPosition(); i++) {\r\n                    if (c[i] == '\\n') {\r\n                        row++;\r\n                        col = i;\r\n                    }\r\n                }\r\n                la.setText(\"행 :\" + row );\r\n                la2.setText(\"열 :\" + (textPane.getCaretPosition() - col));\r\n                try {\r\n                    Thread.sleep(150);\r\n                } catch (InterruptedException e) {\r\n                    return;\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/View/MainView.java b/src/main/java/View/MainView.java
+--- a/src/main/java/View/MainView.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/View/MainView.java	(date 1670616279812)
+@@ -1,10 +1,11 @@
+ package View;
+ 
++import Controller.FileController;
++import Controller.InputController;
++
+ import java.awt.*;
+-import java.awt.event.ActionEvent;
+-import java.awt.event.ActionListener;
+-import java.awt.event.KeyAdapter;
+-import java.awt.event.KeyEvent;
++import java.awt.event.*;
++import java.util.Objects;
+ import javax.swing.event.UndoableEditEvent;
+ import javax.swing.event.UndoableEditListener;
+ import javax.swing.text.*;
+@@ -13,22 +14,22 @@
+ 
+ 
+ public class MainView extends JFrame {
+-    private JFrame fce = new JFrame();
+-    static JTextPane textPane = new JTextPane();
++    public static JTextPane textPane = new JTextPane();
+ 
+-    private Highlighter h = textPane.getHighlighter();
++    private final Highlighter h = textPane.getHighlighter();
+ 
+-    private JLabel la = new JLabel("");
+-    private JLabel la2 = new JLabel("");
+-    private StatusThread st = new StatusThread();
+-
++    private InputController song = new InputController(textPane);
++    private final JLabel la = new JLabel("");
++    private final JLabel la2 = new JLabel("");
+     public MainView() {
+         setLayout(null);
+-        fce.setTitle("C 소스 편집기");
+-        fce.setSize(1080, 720);
+-        fce.setLocation(100, 50);
+-        fce.setDefaultCloseOperation(fce.EXIT_ON_CLOSE);
+-        Container c = fce.getContentPane();
++        JFrame jFrame = new JFrame();
++
++        jFrame.setTitle("C 소스 편집기");
++        jFrame.setSize(1080, 720);
++        jFrame.setLocation(100, 50);
++        jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
++        Container c = jFrame.getContentPane();
+         c.setLayout(null);
+         JScrollPane scrollPane = new JScrollPane(textPane);
+         scrollPane.setSize(800, 500);
+@@ -43,44 +44,82 @@
+         c.add(la2);
+ 
+         JMenuBar menuBar = new JMenuBar();
+-        fce.setJMenuBar(menuBar);
++        jFrame.setJMenuBar(menuBar);
++
++        JMenu fileMenu = new JMenu("File");
++        menuBar.add(fileMenu);
++
++        JMenu editMenu = new JMenu("Edit");
++        menuBar.add(editMenu);
++
++        jFrame.setVisible(true);
+ 
+-        JMenu menu1 = new JMenu("File");
+-        menuBar.add(menu1);
++        JMenuItem newItem = new JMenuItem("NewFile    Ctrl+N");
++        fileMenu.add(newItem);
+ 
+-        JMenu Edit_Menu = new JMenu("Edit");
+-        menuBar.add(Edit_Menu);
++        JMenuItem loadItem = new JMenuItem("LoadFile   Ctrl+O");
++        fileMenu.add(loadItem);
+ 
+-        fce.setVisible(true);
++        JMenuItem saveItem = new JMenuItem("SaveFile   Ctrl+S");
++        fileMenu.add(saveItem);
+ 
+-        JMenuItem menu1Item = new JMenuItem("NewFile   Ctrl+N");
+-        menu1.add(menu1Item);
++        JMenuItem exitItem = new JMenuItem("ExitFile   Ctrl+Q");
++        fileMenu.add(exitItem);
+ 
+-        JMenuItem menu2Item = new JMenuItem("LoadFile   Ctrl+O");
+-        menu1.add(menu2Item);
++        //파일 메뉴 액션 리스너 등록
++        FileController fc = new FileController();
++        newItem.addActionListener(fc);
++        loadItem.addActionListener(fc);
++        saveItem.addActionListener(fc);
++        exitItem.addActionListener(fc);
+ 
+-        JMenuItem menu3Item = new JMenuItem("SaveFile   Ctrl+S");
+-        menu1.add(menu3Item);
++        //파일 메뉴 단축키 리스너 등록
++        textPane.addKeyListener(fc.new FileHotkeyListener());
+ 
+-        JMenuItem menu4Item = new JMenuItem("ExitFile   Ctrl+Q");
+-        menu1.add(menu4Item);
++
+ 
+         JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
+-        Edit_Menu.add(Edit_Menu_search_Item);
++        editMenu.add(Edit_Menu_search_Item);
++        Edit_Menu_search_Item.addActionListener(new SearchViewEv());
+ 
+         JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
+-        Edit_Menu.add(Edit_Menu_ALLsearch_Item);
++        editMenu.add(Edit_Menu_ALLsearch_Item);
++        Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
+ 
+         JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
+-        Edit_Menu.add(Edit_Menu_change_Item);
++        editMenu.add(Edit_Menu_change_Item);
++        Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
+ 
+         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
+-        Edit_Menu.add(Edit_Menu_ALLchange_Item);
++        editMenu.add(Edit_Menu_ALLchange_Item);
++        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
+ 
++        StatusThread st = new StatusThread();
+         st.start();
+ 
+     }
+ 
++    class SearchViewEv implements ActionListener {
++        public void actionPerformed(ActionEvent e) {
++            SearchView searchView = new SearchView();
++        }
++    }
++    class SearchAllViewEv implements ActionListener {
++        public void actionPerformed(ActionEvent e) {
++            SearchAllView searchAllView = new SearchAllView();
++
++        }
++    }
++    class ChangeViewEv implements ActionListener {
++        public void actionPerformed(ActionEvent e) {
++            ChangeView changeView = new ChangeView();
++        }
++    }
++    class ChangeAllViewEv implements ActionListener {
++        public void actionPerformed(ActionEvent e) {
++            ChangeAllView changeAllView = new ChangeAllView();
++        }
++    }
+ 
+     class StatusThread extends Thread {
+         public void run() {
+@@ -104,7 +143,4 @@
+             }
+         }
+     }
+-}
+-
+-
+-
++}
+\ No newline at end of file
+Index: src/main/java/Controller/EditController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\npublic class EditController {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/EditController.java b/src/main/java/Controller/EditController.java
+--- a/src/main/java/Controller/EditController.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/Controller/EditController.java	(date 1670615996008)
+@@ -1,4 +1,197 @@
+ package Controller;
+ 
+-public class EditController {
+-}
++import View.EditView;
++import View.MainView;
++import View.SearchView;
++import java.awt.Component;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++import java.awt.event.KeyAdapter;
++import java.awt.event.KeyEvent;
++import java.util.StringTokenizer;
++import javax.swing.JButton;
++import javax.swing.JFrame;
++import javax.swing.JOptionPane;
++import javax.swing.JTextPane;
++import javax.swing.text.BadLocationException;
++import javax.swing.text.DefaultHighlighter;
++import javax.swing.text.Highlighter;
++
++public class EditController extends JFrame implements ActionListener {
++    private static SearchView SearchView;
++    private static EditView EditView;
++
++    public EditController() {
++    }
++
++    public void actionPerformed(ActionEvent e) {
++        if (e.getActionCommand().equals("Search   Ctrl+F")) {
++            SearchView = new SearchView();
++        } else if (e.getActionCommand().equals("searchALL   Ctrl+G")) {
++            SearchView = new SearchView();
++        } else if (e.getActionCommand().equals("Change   Ctrl+R")) {
++            EditView = new EditView();
++        } else if (e.getActionCommand().equals("ChangeALl   Ctrl+T")) {
++            EditView = new EditView();
++        }
++
++    }
++
++    public static class MyActionListener implements ActionListener {
++        private final JTextPane textPane;
++        private final Highlighter text_highlight;
++        private static int offset = 0;
++        private static int last_offset = 0;
++        private static String find_text;
++        private static int count = 0;
++        private static int word_count = 0;
++        private static String conversion_word = "";
++        private static String viewText;
++
++        public MyActionListener() {
++            this.textPane = MainView.textPane;
++            this.text_highlight = this.textPane.getHighlighter();
++        }
++
++        public void actionPerformed(ActionEvent e) {
++            int fi = 0;
++            JButton currentButton = (JButton)e.getSource();
++            if (!currentButton.getText().equals("찾기") && !currentButton.getText().equals("단일 선택")) {
++                if (!currentButton.getText().equals("모두 찾기") && !currentButton.getText().equals("모두 선택")) {
++                    if (currentButton.getText().equals("바꾸기")) {
++                        if (word_count != 0) {
++                            conversion_word = EditController.EditView.tf2.getText();
++                            if (count == 1) {
++                                this.textPane.select(last_offset - find_text.length(), last_offset);
++                                this.textPane.replaceSelection(conversion_word);
++
++                                try {
++                                    this.text_highlight.addHighlight(last_offset - find_text.length(), last_offset - find_text.length() + conversion_word.length(), DefaultHighlighter.DefaultPainter);
++                                } catch (BadLocationException var13) {
++                                    var13.printStackTrace();
++                                }
++
++                                count = 0;
++                            } else {
++                                this.textPane.select(offset - find_text.length(), offset);
++                                this.textPane.replaceSelection(conversion_word);
++
++                                try {
++                                    this.text_highlight.addHighlight(offset - find_text.length(), offset - find_text.length() + conversion_word.length(), DefaultHighlighter.DefaultPainter);
++                                } catch (BadLocationException var12) {
++                                    var12.printStackTrace();
++                                }
++                            }
++                        }
++
++                        word_count = 0;
++                    } else if (currentButton.getText().equals("모두 바꾸기")) {
++                        int cpos = 0;
++                        conversion_word = EditController.EditView.tf2.getText();
++                        String cur = this.textPane.getText();
++                        String after = cur.replaceAll(find_text, conversion_word);
++                        this.textPane.selectAll();
++                        this.textPane.replaceSelection(after);
++                        int max2 = after.lastIndexOf(conversion_word);
++
++                        for(int k = 0; k < after.length(); ++k) {
++                            cpos = after.indexOf(conversion_word, cpos);
++
++                            try {
++                                this.text_highlight.addHighlight(cpos, cpos + conversion_word.length(), DefaultHighlighter.DefaultPainter);
++                            } catch (BadLocationException var11) {
++                            }
++
++                            cpos += conversion_word.length();
++                            if (cpos >= max2) {
++                                break;
++                            }
++                        }
++                    }
++                } else {
++                    this.text_highlight.removeAllHighlights();
++                    viewText = this.textPane.getText().replace("\r\n", "\n");
++                    if (currentButton.getText().equals("모두 찾기")) {
++                        find_text = EditController.SearchView.tf1.getText();
++                    } else if (currentButton.getText().equals("모두 선택")) {
++                        find_text = EditController.EditView.tf1.getText();
++                    }
++
++                    new StringTokenizer(viewText, " \t\r\n");
++                    if (viewText.contains(find_text)) {
++                        int max = viewText.lastIndexOf(find_text);
++                        int k = 0;
++
++                        while(true) {
++                            fi = viewText.indexOf(find_text, fi);
++
++                            try {
++                                this.text_highlight.addHighlight(fi, fi + find_text.length(), DefaultHighlighter.DefaultPainter);
++                            } catch (BadLocationException var14) {
++                                var14.printStackTrace();
++                            }
++
++                            fi += find_text.length();
++                            if (fi >= max) {
++                                break;
++                            }
++
++                            ++k;
++                        }
++                    } else {
++                        JOptionPane.showMessageDialog((Component)null, "더 이상  찾는 단어가 없습니다.", "message", 2);
++                    }
++                }
++            } else {
++                this.text_highlight.removeAllHighlights();
++                viewText = this.textPane.getText().replace("\r\n", "\n");
++                if (currentButton.getText().equals("찾기")) {
++                    find_text = EditController.SearchView.tf1.getText();
++                } else if (currentButton.getText().equals("단일 선택")) {
++                    find_text = EditController.EditView.tf1.getText();
++                }
++
++                if (viewText.contains(find_text)) {
++                    word_count = 1;
++                    offset = viewText.indexOf(find_text, offset);
++                    count = 0;
++
++                    try {
++                        this.text_highlight.addHighlight(offset, offset + find_text.length(), DefaultHighlighter.DefaultPainter);
++                    } catch (BadLocationException var15) {
++                        var15.printStackTrace();
++                    }
++
++                    offset += find_text.length();
++                    if (offset > viewText.lastIndexOf(find_text)) {
++                        last_offset = offset;
++                        count = 1;
++                        offset = 0;
++                    }
++                } else {
++                    word_count = 0;
++                    JOptionPane.showMessageDialog((Component)null, "더 이상  찾는 단어가 없습니다.", "message", 2);
++                }
++            }
++
++        }
++    }
++
++    static class MykeyListener extends KeyAdapter {
++        MykeyListener() {
++        }
++
++        public void keyPressed(KeyEvent e) {
++            if (e.isControlDown() && e.getKeyCode() == 70) {
++                EditController.SearchView = new SearchView();
++            } else if (e.isControlDown() && e.getKeyCode() == 71) {
++                EditController.SearchView = new SearchView();
++            } else if (e.isControlDown() && e.getKeyCode() == 82) {
++                EditController.EditView = new EditView();
++            } else if (e.isControlDown() && e.getKeyCode() == 84) {
++                EditController.EditView = new EditView();
++            }
++
++        }
++    }
++}
+\ No newline at end of file
+Index: src/main/java/Controller/FileController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\npublic class FileController {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/FileController.java b/src/main/java/Controller/FileController.java
+--- a/src/main/java/Controller/FileController.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/Controller/FileController.java	(date 1670616134549)
+@@ -1,4 +1,205 @@
+ package Controller;
++import View.MainView;
++
++import javax.swing.*;
++import javax.swing.event.UndoableEditEvent;
++import javax.swing.event.UndoableEditListener;
++import javax.swing.text.BadLocationException;
++import javax.swing.text.Document;
++import javax.swing.undo.UndoManager;
++import java.awt.*;
++import java.awt.event.*;
++import java.io.*;
++import java.util.Objects;
++import java.util.StringTokenizer;
++
++public class FileController extends JFrame implements ActionListener, UndoableEditListener {
++    private final JTextPane pane = MainView.textPane;
++    private String SavePathName = null;
++
++    //Undo, Redo 구현하기 위한 속성
++    UndoManager undoManager = new UndoManager();
++    Document document = pane.getDocument();
++
++    public FileController(){
++        //document에 UndoableEditListener붙여줌.
++        document.addUndoableEditListener(this);
++    }
++
++    public void fileLoad(String path) throws BadLocationException {
++        InputStreamReader reader = null;
++        FileInputStream inputStream = null;
++        BufferedReader bufferedReader = null;
++
++        try {
++            inputStream = new FileInputStream(path);
++            reader = new InputStreamReader(inputStream);
++            bufferedReader = new BufferedReader(reader);
++            pane.setText("");
++            String str = null;
++            String data = "";
++
++            while ((str = bufferedReader.readLine()) != null)
++                data = data.concat(str + "\n");
++            MainView.textPane.setText(data);
++        }
++        catch (IOException e) {
++            e.printStackTrace();
++        }
++        finally {
++            try {
++                assert inputStream != null;
++                inputStream.close();
++            }
++            catch (IOException e) {
++                e.printStackTrace();
++            }
++        }
++    }
++
++    public void fileSave(String path) {
++        FileOutputStream fo = null;
++        try {
++            fo = new FileOutputStream(path);
++            String str = pane.getText();
++            StringTokenizer fs = new StringTokenizer(str, "\n");
++            while (fs.hasMoreTokens()) {
++                fo.write(fs.nextToken().getBytes());
++                fo.write(("\r\n").getBytes());
++            }
++        }
++        catch (Exception e) {
++            e.printStackTrace();
++        }
++        finally {
++            try {
++                assert fo != null;
++                fo.close();
++            }
++            catch (IOException e) {
++                e.printStackTrace();
++            }
++        }
++    }
++
++    @Override
++    public void actionPerformed(ActionEvent e) {
++        //메모장 나가기
++        if (Objects.equals(e.getActionCommand(), "ExitFile   Ctrl+Q")) {
++            System.out.println("exit");
++            System.exit(0);
++        }
++        //파일 새로 생성
++        if (Objects.equals(e.getActionCommand(), "NewFile    Ctrl+N") && !pane.getText().equals("")) {
++            int option = JOptionPane.showConfirmDialog(null, "현재 내용을 저장 하시겠습니까?", "New", JOptionPane.YES_NO_CANCEL_OPTION);
++            //OK를 누르면 SaveFile실행
++            if (option == JOptionPane.OK_OPTION) {
++                ActionEvent ae = new ActionEvent(new Object(), 0, "SaveFile   Ctrl+S");
++                this.actionPerformed(ae);
++                pane.setText("");
++            }
++            //NO를 누르면 메모장 비우기
++            else if (option == JOptionPane.NO_OPTION)
++                pane.setText("");
++        }
++        //파일 불러오기
++        if (Objects.equals(e.getActionCommand(), "LoadFile   Ctrl+O")) {
++            if (!pane.getText().equals("")) {
++                int option = JOptionPane.showConfirmDialog(null, "현재 내용을 저장 하시겠습니까?", "fileLoad", JOptionPane.YES_NO_CANCEL_OPTION);
++                //OK누르면 SaveFile실행
++                if (option == JOptionPane.OK_OPTION) {
++                    ActionEvent ae = new ActionEvent(new Object(), 0, "SaveFile   Ctrl+S");
++                    this.actionPerformed(ae);
++                }
++                else if (option == JOptionPane.CANCEL_OPTION) {
++                    return;
++                }
++            }
++            FileDialog fileDialog = new FileDialog(this, "파일 불러오기", FileDialog.LOAD);
++            fileDialog.setDirectory(".");
++            fileDialog.setVisible(true);
++            //불러올 파일 경로 가져오기
++            String loadPathName = fileDialog.getFile();
++            if (loadPathName != null)
++                try {
++                    fileLoad(loadPathName);
++                }
++                catch (BadLocationException e1) {
++                    e1.printStackTrace();
++                }
++        }
++        if (Objects.equals(e.getActionCommand(), "SaveFile   Ctrl+S")) {
++            FileDialog fileDialog = new FileDialog(this, "파일 저장하기", FileDialog.SAVE);
++            fileDialog.setDirectory(".");
++            fileDialog.setVisible(true);
++            //저장할 파일 경로 가져오기
++            SavePathName = fileDialog.getFile();
++            if (SavePathName != null) {
++                fileSave(SavePathName);
++            }
++            new AutoSave(SavePathName);
++        }
++    }
++
++    @Override
++    public void undoableEditHappened(UndoableEditEvent e) {
++        undoManager.addEdit(e.getEdit());
++    }
+ 
+-public class FileController {
++    class AutoSave implements Runnable {
++        String autopath;
++
++        AutoSave(String path) {
++            autopath = path;
++            new Thread(this).start();
++        }
++
++        public void run() {
++            while (true) {
++                try {
++                    if (SavePathName == null) {
++                        continue;
++                    }
++                    Thread.sleep(10000);
++                    fileSave(autopath);
++                }
++                catch (InterruptedException e) {
++                    return;
++                }
++            }
++        }
++    }
++
++    public class FileHotkeyListener extends KeyAdapter {
++        public void keyPressed(KeyEvent e) {
++            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
++                if (SavePathName == null) {
++                    ActionEvent ae = new ActionEvent(new Object(), 0, "SaveFile   Ctrl+S");
++                    actionPerformed(ae);
++                }
++                else
++                    fileSave(SavePathName);
++            }
++            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_N) {
++                ActionEvent ae = new ActionEvent(new Object(), 0, "NewFile    Ctrl+N");
++                actionPerformed(ae);
++            }
++            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
++                ActionEvent ae = new ActionEvent(new Object(), 0, "LoadFile   Ctrl+O");
++                actionPerformed(ae);
++            }
++            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
++                System.exit(0);
++            }
++            else if (e.isShiftDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) {
++                if(undoManager.canRedo())
++                    undoManager.redo();
++            }
++            else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z){
++                if(undoManager.canUndo())
++                    undoManager.undo();
++            }
++
++        }
++    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f340b513-1cf6-4e07-9f1e-ed7dcff52f15\" name=\"Changes\" comment=\"초기 세팅\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Iabfq2q5dmhIStgaGEgGM1aVCS\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"settings.editor.selected.configurable\": \"reference.settingsdialog.project.gradle\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"C_source_editor.main\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"test\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"test\" />\r\n      <module name=\"C_source_editor.main\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f340b513-1cf6-4e07-9f1e-ed7dcff52f15\" name=\"Changes\" comment=\"\" />\r\n      <created>1670422749956</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670422749956</updated>\r\n      <workItem from=\"1670422751948\" duration=\"1541000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"초기 세팅\">\r\n      <created>1670424049024</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670424049024</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"초기 세팅\">\r\n      <created>1670424280829</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670424280829</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"초기 세팅\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"초기 세팅\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/.idea/workspace.xml	(date 1670679763670)
+@@ -4,7 +4,17 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="초기 세팅" />
++    <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="초기 세팅">
++      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EditController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FileController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/InputController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/HeaderModel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/KeywordModel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/EditView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/EditView.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainView.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -41,6 +51,7 @@
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "WebServerToolWindowFactoryState": "false",
++    "nodejs_package_manager_path": "npm",
+     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+   }
+ }]]></component>
+@@ -75,6 +86,8 @@
+       <option name="presentableId" value="Default" />
+       <updated>1670422749956</updated>
+       <workItem from="1670422751948" duration="1541000" />
++      <workItem from="1670659346513" duration="100000" />
++      <workItem from="1670678724283" duration="1038000" />
+     </task>
+     <task id="LOCAL-00001" summary="초기 세팅">
+       <created>1670424049024</created>
+Index: src/main/java/Controller/InputController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\npublic class InputController {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/InputController.java b/src/main/java/Controller/InputController.java
+--- a/src/main/java/Controller/InputController.java	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/src/main/java/Controller/InputController.java	(date 1670659424949)
+@@ -1,4 +1,585 @@
+ package Controller;
+ 
+-public class InputController {
+-}
++import Model.HeaderModel;
++import Model.KeywordModel;
++import Model.DatatypeModel;
++
++import java.util.*;
++import java.awt.*;
++import javax.swing.JTextPane;
++import javax.swing.text.AttributeSet;
++import javax.swing.text.SimpleAttributeSet;
++import javax.swing.text.StyleConstants;
++import javax.swing.text.StyleContext;
++import javax.swing.text.StyledDocument;
++import java.util.Stack; //import
++public class InputController implements Runnable {
++    private final JTextPane UserText;
++    private String UserTextString;
++    private char[] UserTextCharacter;
++    private String[] UserTextCharacterColor;
++    private ArrayList<String> UserTextWord;
++
++    private final String[] getKeyword;
++    private final String[] getHeader;
++    private final String[] getDatatype;
++
++    private final AttributeSet CyanColor;
++    private final AttributeSet BlackColor;
++    private final AttributeSet PinkColor;
++    private final AttributeSet RedColor;
++    private final AttributeSet ErrorColor;
++    private final AttributeSet MagentaColor;
++    private final AttributeSet BlueColor;
++    private final AttributeSet GreenColor;
++    private final AttributeSet OrangeColor;
++    private final AttributeSet GrayColor;
++    public InputController(JTextPane text) {
++        KeywordModel KeyWord = new KeywordModel();
++        HeaderModel Header = new HeaderModel();
++        DatatypeModel Datatype = new DatatypeModel();
++        getKeyword = KeyWord.getKeyword();
++        getHeader = Header.getHeader();
++        getDatatype = Datatype.getDatatype();
++        this.UserText = text;
++        new Thread(this).start();
++        StyleContext context = new StyleContext();
++        PinkColor = context.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.PINK);
++        CyanColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.CYAN);
++        BlackColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.BLACK);
++        MagentaColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.MAGENTA);
++        BlueColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.BLUE);
++        RedColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.RED);
++        GreenColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.GREEN);
++        OrangeColor = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.ORANGE);
++        GrayColor=context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.GRAY);
++        AttributeSet as_underline = context.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Underline, Boolean.TRUE);
++        ErrorColor = context.addAttributes(RedColor, as_underline);
++
++    }
++
++    @Override
++    public void run() {
++        while (true) {
++            UserTextString = UserText.getText().replace("\r\n", "\n");
++            StyledDocument userTextDocument = UserText.getStyledDocument();
++            UserTextCharacter = UserTextString.toCharArray();
++            UserTextCharacterColor = new String[UserTextCharacter.length];
++            Arrays.fill(UserTextCharacterColor, "");
++            UserTextWord = new ArrayList<String>();
++            StringTokenizer userTextTokenizer = new StringTokenizer(UserTextString, "\t|\r|\n|\u0020|\u00A0");
++            while (userTextTokenizer.hasMoreElements()) {
++                UserTextWord.add(userTextTokenizer.nextToken());
++            }
++            KeywordEdit();
++            IncludeEdit();
++            DefineEdit();
++            DateTypeEdit();
++            MarkEdit();
++            for (int ColorSetindex = 0; ColorSetindex < UserTextCharacter.length; ColorSetindex++) {
++                if (UserTextCharacterColor[ColorSetindex].equals("CYAN"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, CyanColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("GREEN"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, GreenColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("ORANGE"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, OrangeColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("MAGENTA"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, MagentaColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("BLUE"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, BlueColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("PINK"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, PinkColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("RED"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, RedColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("GRAY"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, GrayColor, true);
++                else if (UserTextCharacterColor[ColorSetindex].equals("ERROR"))
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, ErrorColor, true);
++                else
++                    userTextDocument.setCharacterAttributes(ColorSetindex, 1, BlackColor, true);
++            }
++            /*
++            try {
++                Thread.sleep(500);
++            } catch (InterruptedException e) {
++                // TODO Auto-generated catch block
++                e.printStackTrace();
++            }
++             */
++        }
++    }
++
++    public void KeywordEdit() {
++        int KeyWordindex = 0;
++        String KeywordValue = null;
++        String ModelKeywordValue = null;
++        for (int Wordindex = 0; Wordindex < UserTextWord.size(); Wordindex++) {
++            for (int ModelKeywordindex = 0; ModelKeywordindex < getKeyword.length; ModelKeywordindex++) {
++                KeywordValue = UserTextWord.get(Wordindex);
++                ModelKeywordValue = getKeyword[ModelKeywordindex];
++                if (KeywordValue.equals(ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(ModelKeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals("(" + ModelKeywordValue) || KeywordValue.equals("{" + ModelKeywordValue) || KeywordValue.equals("[" + ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex + 1; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals(ModelKeywordValue + ")") || KeywordValue.equals(ModelKeywordValue + "}") || KeywordValue.equals(ModelKeywordValue + "]")) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.equals("(" + ModelKeywordValue + ")") || KeywordValue.equals("{" + ModelKeywordValue + "}") || KeywordValue.equals("[" + ModelKeywordValue + "]")) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    for (int SeachKeyWordColor = KeyWordindex + 1; SeachKeyWordColor < KeyWordindex + ModelKeywordValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "CYAN";
++                    }
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                } else if (KeywordValue.contains(ModelKeywordValue)) {
++                    KeyWordindex = UserTextString.indexOf(KeywordValue, KeyWordindex);
++                    KeyWordindex = KeyWordindex + KeywordValue.length();
++                }
++            }
++        }
++    }
++
++    public void IncludeEdit() {
++        int Headerindex = 0;
++        for (int WordIndex = 0; WordIndex < UserTextWord.size(); WordIndex++) {
++            for (int HeaderIndex = 0; HeaderIndex < getHeader.length; HeaderIndex++) {
++                if (UserTextWord.get(WordIndex).equals("#include" + getHeader[HeaderIndex])) {
++                    Headerindex = UserTextString.indexOf(UserTextWord.get(WordIndex), Headerindex);
++                    for (int IncludeColor = Headerindex; IncludeColor < Headerindex + "#include".length(); IncludeColor++) {
++                        //System.out.println(k);
++                        UserTextCharacterColor[IncludeColor] = "CYAN";
++                    }
++                    Headerindex = Headerindex + "#include".length();
++                    for (int HeaderColor = Headerindex; HeaderColor < Headerindex + getHeader[HeaderIndex].length(); HeaderColor++) {
++                        //System.out.println(k);
++                        UserTextCharacterColor[HeaderColor] = "PINK";
++                    }
++                    Headerindex = Headerindex + getHeader[WordIndex].length();
++                    //System.out.println("test1");
++                } else if (UserTextWord.get(WordIndex).contains("#include" + getHeader[HeaderIndex])) {
++                    Headerindex = UserTextString.indexOf(UserTextWord.get(WordIndex), Headerindex);
++                    Headerindex = Headerindex + UserTextWord.get(WordIndex).length();
++                    //System.out.println("test2");
++                } else if (WordIndex != 0 && UserTextWord.get(WordIndex - 1).equals("#include")) {
++                    if (UserTextWord.get(WordIndex).equals(getHeader[HeaderIndex])) {
++                        Headerindex = UserTextString.indexOf("#include", Headerindex);
++                        Headerindex = Headerindex + "#include".length();
++                        Headerindex = UserTextString.indexOf(getHeader[HeaderIndex], Headerindex);
++                        //System.out.println("test2"+Headerindex);
++                        for (int HeaderColor = Headerindex; HeaderColor < Headerindex + getHeader[HeaderIndex].length(); HeaderColor++) {
++                            //System.out.println(k);
++                            UserTextCharacterColor[HeaderColor] = "PINK";
++                        }
++                        Headerindex = Headerindex + getHeader[WordIndex].length();
++                        //System.out.println("test3");
++                    } else if (UserTextWord.get(WordIndex).contains(getHeader[HeaderIndex])) {
++                        Headerindex = UserTextString.indexOf(UserTextWord.get(WordIndex), Headerindex);
++                        Headerindex = Headerindex + UserTextWord.get(WordIndex).length();
++                        //System.out.println("test4");
++                    }
++                }
++            }
++        }
++    }
++
++    public void DefineEdit() {
++        char Definecheck = ' ';
++        int Defineindex = 0;
++        String DefineValue = null;
++        int DefineValueindex = 0;
++        String SearchConstantValue = null;
++        for (int Wordindex = 1; Wordindex < UserTextWord.size(); Wordindex++) {
++            if (UserTextWord.get(Wordindex - 1).equals("#define")) {
++                Definecheck = UserTextWord.get(Wordindex).charAt(0);
++                DefineValue = UserTextWord.get(Wordindex);
++                Defineindex = UserTextString.indexOf("#define", Defineindex);
++                Defineindex = Defineindex + "#define".length();
++                Defineindex = UserTextString.indexOf(DefineValue, Defineindex);
++                if (!Character.isDigit(Definecheck) && Definecheck != '!' && Definecheck != '@' && Definecheck != '#' && Definecheck != '%' && Definecheck != '^' && Definecheck != '&' && Definecheck != '*' && Definecheck != '(' && Definecheck != ')') {
++                    for (int ConstantColor = Defineindex; ConstantColor < Defineindex + DefineValue.length(); ConstantColor++) {
++                        UserTextCharacterColor[ConstantColor] = "MAGENTA";
++                        //System.out.println("test1:     "+ConstantColor);
++                    }
++                    Defineindex = Defineindex + DefineValue.length();
++                    DefineValueindex = Defineindex;
++                    for (int SearchConstant = Wordindex + 1; SearchConstant < UserTextWord.size(); SearchConstant++) {
++                        SearchConstantValue = UserTextWord.get(SearchConstant);
++                        if (SearchConstantValue.equals(DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex; SeachConstantColor < DefineValueindex + DefineValue.length(); SeachConstantColor++) {
++                                UserTextCharacterColor[SeachConstantColor] = "MAGENTA";
++                                //System.out.println("test2:     "+h);
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals("(" + DefineValue) || SearchConstantValue.equals("{" + DefineValue) || SearchConstantValue.equals("[" + DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex + 1; SeachConstantColor < DefineValueindex + DefineValue.length() + 1; SeachConstantColor++) {
++                                UserTextCharacterColor[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals(DefineValue + ")") || SearchConstantValue.equals(DefineValue + "}") || SearchConstantValue.equals(DefineValue + "]")) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex; SeachConstantColor < DefineValueindex + DefineValue.length(); SeachConstantColor++) {
++                                UserTextCharacterColor[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.equals("(" + DefineValue + ")") || SearchConstantValue.equals("{" + DefineValue + "}") || SearchConstantValue.equals("[" + DefineValue + "]")) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            for (int SeachConstantColor = DefineValueindex + 1; SeachConstantColor < DefineValueindex + DefineValue.length() + 1; SeachConstantColor++) {
++                                UserTextCharacterColor[SeachConstantColor] = "MAGENTA";
++                            }
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        } else if (SearchConstantValue.contains(DefineValue)) {
++                            DefineValueindex = UserTextString.indexOf(SearchConstantValue, DefineValueindex);
++                            DefineValueindex = DefineValueindex + SearchConstantValue.length();
++                        }
++                    }
++                } else {
++                    for (int j = Defineindex; j < UserTextCharacter.length; j++) {
++                        if (UserTextCharacter[j] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterColor[j] = "ERROR";
++                    }
++                    Defineindex = Defineindex + DefineValue.length();
++                }
++            }
++        }
++    }
++
++
++    public void DateTypeEdit() {
++        String DataValue = null;
++        String ModelDataValue = null;
++        int Dataindex = 0;
++        for (int Wordindex = 0; Wordindex < UserTextWord.size(); Wordindex++) {
++            for (int ModelDataindex = 0; ModelDataindex < getDatatype.length; ModelDataindex++) {
++                DataValue = UserTextWord.get(Wordindex);
++                ModelDataValue = getDatatype[ModelDataindex];
++                if (DataValue.equals(ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(ModelDataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex; SeachKeyWordColor < Dataindex + ModelDataValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals("(" + ModelDataValue) || DataValue.equals("{" + ModelDataValue) || DataValue.equals("[" + ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex + 1; SeachKeyWordColor < Dataindex + ModelDataValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals(ModelDataValue + ")") || DataValue.equals(ModelDataValue + "}") || DataValue.equals(ModelDataValue + "]")) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex; SeachKeyWordColor < Dataindex + ModelDataValue.length(); SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.equals("(" + ModelDataValue + ")") || DataValue.equals("{" + ModelDataValue + "}") || DataValue.equals("[" + ModelDataValue + "]")) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    for (int SeachKeyWordColor = Dataindex + 1; SeachKeyWordColor < Dataindex + ModelDataValue.length() + 1; SeachKeyWordColor++) {
++                        UserTextCharacterColor[SeachKeyWordColor] = "BLUE";
++                    }
++                    Dataindex = Dataindex + DataValue.length();
++                } else if (DataValue.contains(ModelDataValue)) {
++                    Dataindex = UserTextString.indexOf(DataValue, Dataindex);
++                    Dataindex = Dataindex + DataValue.length();
++                }
++            }
++        }
++
++        char DataTypecheck = ' ';
++        int DataTypeindex = 0;
++        String DataTypeValue = null;
++        int DataTypeValueindex = 0;
++        String SearchDataValue = null;
++        String ModellDataTypeValue = null;
++        for (int Wordindex = 1; Wordindex < UserTextWord.size(); Wordindex++) {
++            if (!(Arrays.asList(getDatatype).contains(UserTextWord.get(Wordindex)))) {
++                //System.out.println("test1:     " + DataTypeindex);
++                if ((Arrays.asList(getDatatype).contains(UserTextWord.get(Wordindex - 1)))) {
++                    ModellDataTypeValue = UserTextWord.get(Wordindex - 1);
++                    DataTypecheck = UserTextWord.get(Wordindex).charAt(0);
++                    DataTypeValue = UserTextWord.get(Wordindex);
++                    DataTypeindex = UserTextString.indexOf(ModellDataTypeValue, DataTypeindex);
++                    DataTypeindex = DataTypeindex + ModellDataTypeValue.length();
++                    DataTypeindex = UserTextString.indexOf(DataTypeValue, DataTypeindex);
++                    //System.out.println("test2:     " + DataTypeindex);
++                    if (!Character.isDigit(DataTypecheck) && DataTypecheck != '!' && DataTypecheck != '@' && DataTypecheck != '#' && DataTypecheck != '%' && DataTypecheck != '^' && DataTypecheck != '&' && DataTypecheck != '*' && DataTypecheck != '(' && DataTypecheck != ')') {
++                        for (int ConstantColor = DataTypeindex; ConstantColor < DataTypeindex + DataTypeValue.length(); ConstantColor++) {
++                            UserTextCharacterColor[ConstantColor] = "MAGENTA";
++                            //System.out.println("test1:     "+ConstantColor);
++                        }
++                        DataTypeindex = DataTypeindex + DataTypeValue.length();
++                        DataTypeValueindex = DataTypeindex;
++                        //System.out.println("test3:     " + DataTypeindex);
++                        for (int SearchConstant = Wordindex + 1; SearchConstant < UserTextWord.size(); SearchConstant++) {
++                            SearchDataValue = UserTextWord.get(SearchConstant);
++                            if (SearchDataValue.equals(DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length(); SeachDatatypeColor++) {
++                                    UserTextCharacterColor[SeachDatatypeColor] = "MAGENTA";
++                                    //System.out.println("test2:     "+h);
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals("(" + DataTypeValue) || SearchDataValue.equals("{" + DataTypeValue) || SearchDataValue.equals("[" + DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex + 1; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length() + 1; SeachDatatypeColor++) {
++                                    UserTextCharacterColor[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals(DataTypeValue + ")") || SearchDataValue.equals(DataTypeValue + "}") || SearchDataValue.equals(DataTypeValue + "]")) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length(); SeachDatatypeColor++) {
++                                    UserTextCharacterColor[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.equals("(" + DataTypeValue + ")") || SearchDataValue.equals("{" + DataTypeValue + "}") || SearchDataValue.equals("[" + DataTypeValue + "]")) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                for (int SeachDatatypeColor = DataTypeValueindex + 1; SeachDatatypeColor < DataTypeValueindex + DataTypeValue.length() + 1; SeachDatatypeColor++) {
++                                    UserTextCharacterColor[SeachDatatypeColor] = "MAGENTA";
++                                }
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            } else if (SearchDataValue.contains(DataTypeValue)) {
++                                DataTypeValueindex = UserTextString.indexOf(SearchDataValue, DataTypeValueindex);
++                                DataTypeValueindex = DataTypeValueindex + SearchDataValue.length();
++                            }
++                        }
++                    } else {
++                        for (int j = DataTypeindex; j < UserTextCharacter.length; j++) {
++                            if (UserTextCharacter[j] == '\n') {
++                                break;
++                            }
++                            UserTextCharacterColor[j] = "ERROR";
++                        }
++                        DataTypeindex = DataTypeindex + DataTypeValue.length();
++                        //System.out.println("test4:     " + DataTypeindex);
++                    }
++                }
++            }
++        }
++    }
++    public void MarkEdit() {
++        Stack<Character> MarkEditStack = new Stack<Character>(); //Char형 스택 선언
++        Stack<Integer> brackePosStack = new Stack<Integer>(); //Integer형 스택 선언
++        int OpenRemarkPos = 0;
++        int OpenQuotmarkPos = 0;
++        int OpenBracketPos = 0;
++        char BracketItem = ' ';
++        for (int characterIndex = 0; characterIndex < UserTextCharacter.length; characterIndex++) {
++            if (characterIndex != UserTextCharacter.length - 1) {
++                if (MarkEditStack.size() != 0) {
++                    if ((MarkEditStack.peek() != '"') && (MarkEditStack.peek() != '*') && (MarkEditStack.peek() != '+')) {
++                        if ((characterIndex + 1 < UserTextCharacter.length) && ((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                            MarkEditStack.push('+');
++                            for (int characterColor = characterIndex; characterColor < UserTextCharacter.length; characterColor++) {
++                                if (UserTextCharacter[characterColor] == '\n') {
++                                    break;
++                                }
++                                UserTextCharacterColor[characterColor] = "GREEN";
++                            }
++                        }
++                        if ((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '*')) {
++                            MarkEditStack.push('*');
++                            OpenRemarkPos = characterIndex;
++                            for (int characterColor = characterIndex; characterColor < UserTextCharacter.length - 1; characterColor++) {
++                                if (UserTextCharacter[characterColor] == '*' && UserTextCharacter[characterColor + 1] == '/') {
++                                    break;
++                                } else {
++                                    UserTextCharacterColor[characterColor] = "ERROR";
++                                    UserTextCharacterColor[characterColor + 1] = "ERROR";
++                                }
++                            }
++                        }
++                        if (((UserTextCharacter[characterIndex] == '*') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                            UserTextCharacterColor[characterIndex] = UserTextCharacterColor[characterIndex + 1] = "ERROR";
++                        }
++                    }
++                    if ((UserTextCharacter[characterIndex] == '\n') && (MarkEditStack.peek()) == '+') {
++                        MarkEditStack.pop();
++                        continue;
++                    }
++                    if ((MarkEditStack.peek() == '*')) {
++                        if (UserTextCharacter[characterIndex] == '*' && UserTextCharacter[characterIndex + 1] == '/') {
++                            MarkEditStack.pop();
++                            for (int characterColor = OpenRemarkPos; characterColor < characterIndex + 2; characterColor++)
++                                UserTextCharacterColor[characterColor] = "GREEN";
++                            continue;
++                        }
++                    }
++                } else {
++                    if (((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '/'))) {
++                        MarkEditStack.push('+');
++                        for (int characterColor = characterIndex; characterColor < UserTextCharacter.length; characterColor++) {
++                            if (UserTextCharacter[characterColor] == '\n') {
++                                break;
++                            }
++                            UserTextCharacterColor[characterColor] = "GREEN";
++                        }
++                    }
++                    if (((UserTextCharacter[characterIndex] == '/') && (UserTextCharacter[characterIndex + 1] == '*'))) {
++                        MarkEditStack.push('*');
++                        OpenRemarkPos = characterIndex;
++                        for (int characterColor = characterIndex; characterColor < UserTextCharacter.length - 1; characterColor++) {
++                            if (UserTextCharacter[characterColor] == '*' && UserTextCharacter[characterColor + 1] == '/') {
++                                break;
++                            } else {
++                                UserTextCharacterColor[characterColor] = "ERROR";
++                                UserTextCharacterColor[characterColor + 1] = "ERROR";
++                            }
++                        }
++                    }
++                    if (UserTextCharacter[characterIndex] == '*' && UserTextCharacter[characterIndex + 1] == '/') {
++                        UserTextCharacterColor[characterIndex] = UserTextCharacterColor[characterIndex + 1] = "ERROR";
++                    }
++                }
++                if (UserTextCharacter[characterIndex] == '\'' && UserTextCharacterColor[characterIndex] != "ORANGE" && UserTextCharacterColor[characterIndex] != "GREEN") {
++                    UserTextCharacterColor[characterIndex] = "ERROR";
++                    if ((UserTextCharacter[characterIndex + 1] == '\'')) {
++                        UserTextCharacterColor[characterIndex + 1] = UserTextCharacterColor[characterIndex] = "ORANGE";
++                    } else if ((characterIndex != UserTextCharacter.length - 2) && UserTextCharacter[characterIndex + 2] == '\'') {
++                        UserTextCharacterColor[characterIndex + 2] = UserTextCharacterColor[characterIndex + 1] = UserTextCharacterColor[characterIndex] = "ORANGE";
++                    }
++                }
++            }
++            if (MarkEditStack.size() != 0) {
++                if (UserTextCharacter[characterIndex] == '"' && !(MarkEditStack.contains('"')) && (MarkEditStack.peek() != '+') && (MarkEditStack.peek() != '*')) {
++                    MarkEditStack.push('"');
++                    OpenQuotmarkPos = characterIndex;
++                    UserTextCharacterColor[characterIndex] = "ERROR";
++                    for (int characterColor = characterIndex + 1; characterColor < UserTextCharacter.length; characterColor++) {
++                        if (UserTextCharacter[characterColor] == '"' || UserTextCharacter[characterColor] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterColor[characterColor] = "ERROR";
++                    }
++                }
++                if (MarkEditStack.peek() == '"') {
++                    //System.out.println(i);
++                    //System.out.println(OpenQuotmarkPos);
++                    if (UserTextCharacter[characterIndex] == '"' && characterIndex != OpenQuotmarkPos) {
++                        MarkEditStack.pop();
++                        for (int characterColor = OpenQuotmarkPos; characterColor < characterIndex + 1; characterColor++) {
++                            UserTextCharacterColor[characterColor] = "ORANGE";
++                            //System.out.println("test4");
++                        }
++                        continue;
++                    } else if (UserTextCharacter[characterIndex] == '\n') {
++                        //System.out.println("test4");
++                        MarkEditStack.pop();
++                        continue;
++                    }
++                }
++            } else {
++                if (UserTextCharacter[characterIndex] == '"') {
++                    MarkEditStack.push('"');
++                    OpenQuotmarkPos = characterIndex;
++                    UserTextCharacterColor[characterIndex] = "ERROR";
++                    for (int characterColor = characterIndex + 1; characterColor < UserTextCharacter.length; characterColor++) {
++                        if (UserTextCharacter[characterColor] == '"' || UserTextCharacter[characterColor] == '\n') {
++                            break;
++                        }
++                        UserTextCharacterColor[characterColor] = "ERROR";
++                    }
++                }
++            }
++            if (UserTextCharacter[characterIndex] == '{') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('{')) {
++                if ((MarkEditStack.peek() == '{') && (UserTextCharacter[characterIndex] == '}')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == '}') {
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == '}') {
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++
++            if (UserTextCharacter[characterIndex] == '[') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('[')) {
++                if ((MarkEditStack.peek() == '[') && (UserTextCharacter[characterIndex] == ']')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == ']') {
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == ']') {
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++
++            if (UserTextCharacter[characterIndex] == '(') {
++                BracketItem = UserTextCharacter[characterIndex];
++                OpenBracketPos = characterIndex;
++                MarkEditStack.push(BracketItem);
++                brackePosStack.push(OpenBracketPos);
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++            if ((MarkEditStack.size() != 0) && MarkEditStack.contains('(')) {
++                if ((MarkEditStack.peek() == '(') && (UserTextCharacter[characterIndex] == ')')) {
++                    MarkEditStack.pop();
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "MAGENTA";
++                    brackePosStack.pop();
++                    continue;
++                } else if (UserTextCharacter[characterIndex] == ')') {
++                    UserTextCharacterColor[brackePosStack.peek()] = UserTextCharacterColor[characterIndex] = "ERROR";
++                }
++            } else if (UserTextCharacter[characterIndex] == ')') {
++                UserTextCharacterColor[characterIndex] = "ERROR";
++            }
++        }
++        int SemicolonIndex=0;
++        int SemicolonCheck=0;
++        for (int characterIndex =0 ; characterIndex < UserTextCharacter.length; characterIndex++) {
++            SemicolonCheck=0;
++            if (UserTextCharacter[characterIndex] == '\n') {
++                //System.out.println("test1    "+SemicolonIndex);
++                //System.out.println("test2    "+characterIndex);
++                for (int characterColor = SemicolonIndex; characterColor < characterIndex; characterColor++) {
++                    if(UserTextCharacter[characterColor] ==';'){
++                        UserTextCharacterColor[characterColor] = "GRAY";
++                        SemicolonCheck=1;
++                    }
++                    if(UserTextCharacterColor[characterColor].equals("GREEN") || UserTextCharacterColor[characterColor].equals("PINK") || UserTextCharacterColor[characterColor].equals("CYAN")){
++                        SemicolonCheck=1;
++                    }
++                }
++                if(SemicolonCheck==0)
++                {
++                    for (int characterColor = SemicolonIndex; characterColor < characterIndex; characterColor++) {
++                        UserTextCharacterColor[characterColor] = "ERROR";
++                    }
++                }
++                SemicolonIndex=characterIndex+1;
++            }
++        }
++    }
++}
++
++
++
++
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"delegatedBuild\" value=\"true\" />\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"corretto-17\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 7faa25565fcf5e89da72a6d112fff02839699890)
++++ b/.idea/gradle.xml	(date 1670659423665)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>

@@ -1,11 +1,16 @@
 package View;
 
+import Controller.FileController;
+import Controller.InputController;
+
 import Controller.EditController;
 import Controller.FileController;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Objects;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.*;
@@ -15,11 +20,12 @@ import javax.swing.undo.UndoManager;
 
 public class MainView extends JFrame {
     public static JTextPane textPane = new JTextPane();
-
-    private final Highlighter h = textPane.getHighlighter();
+    private final InputController ic = new InputController(textPane);
 
     private final JLabel la = new JLabel("");
     private final JLabel la2 = new JLabel("");
+    private final StatusThread st = new StatusThread();
+
     public MainView() {
         setLayout(null);
         JFrame jFrame = new JFrame();
@@ -74,6 +80,7 @@ public class MainView extends JFrame {
 
         //파일 메뉴 단축키 리스너 등록
         textPane.addKeyListener(fc.new FileHotkeyListener());
+//        textPane.addKeyListener(ic.new ThreadStopListener());
 
         //에딧메뉴 단축키 리스너 등록
         textPane.addKeyListener(new EditController.MykeyListener());
