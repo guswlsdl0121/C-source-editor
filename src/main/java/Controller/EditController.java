@@ -38,7 +38,7 @@ public class EditController extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals("Search   Ctrl+F"))
+        if (e.getActionCommand().equals("Search          Ctrl+F"))
         {
             //edit=new Edit_View();
             SearchView = new SearchView();
@@ -47,7 +47,7 @@ public class EditController extends JFrame implements ActionListener {
         {
             SearchAllView =new SearchAllView();
         }
-        else if (e.getActionCommand().equals("Change   Ctrl+R"))
+        else if (e.getActionCommand().equals("Change        Ctrl+R"))
         {
             ChangeView = new ChangeView();
         }
