@@ -25,7 +25,6 @@ import javax.swing.text.Highlighter;
  */
 public class EditController extends JFrame implements ActionListener {
     private static SearchView SearchView;
-    private static EditView EditView;
     private static ChangeView ChangeView;
     private static ChangeAllView ChangeAllView;
 
@@ -45,7 +44,7 @@ public class EditController extends JFrame implements ActionListener {
             //edit=new Edit_View();
             SearchView = new SearchView();
         }
-        else if (e.getActionCommand().equals("searchALL   Ctrl+G"))
+        else if (e.getActionCommand().equals("SearchALL   Ctrl+G"))
         {
             SearchAllView =new SearchAllView();
         }
@@ -53,7 +52,7 @@ public class EditController extends JFrame implements ActionListener {
         {
             ChangeView = new ChangeView();
         }
-        else if (e.getActionCommand().equals("ChangeALl   Ctrl+T"))
+        else if (e.getActionCommand().equals("ChangeALL   Ctrl+T"))
         {
             ChangeAllView = new ChangeAllView();
         }
@@ -141,7 +140,6 @@ public class EditController extends JFrame implements ActionListener {
          * 오버라이딩한 메소드. 그냥 눈으로 흘깃 보세요..
          * @param e the event to be processed
          */
-
         @Override
         public void actionPerformed(ActionEvent e)
         {
@@ -183,25 +181,18 @@ public class EditController extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "더 이상  찾는 단어가 없습니다.", "message", JOptionPane.WARNING_MESSAGE);
                 }
             }
-            else if(currentButton.getText().equals("모두 찾기") || currentButton.getText().equals("다중 찾기"))
+            else if(currentButton.getText().equals("다중 찾기"))
             {
                 text_highlight.removeAllHighlights();
                 viewText = textPane.getText().replace("\r\n", "\n");
+                find_text = SearchAllView.tf1.getText();
 
-                if(currentButton.getText().equals("모두 찾기"))
-                {
-                    find_text = SearchView.tf1.getText();
-                }
-                else if(currentButton.getText().equals("다중 찾기"))
-                {
-                    find_text = SearchAllView.tf1.getText();
-                }
 
                 StringTokenizer st = new StringTokenizer(viewText, "\u0020\t\r\n");
                 if(viewText.contains(find_text))
                 {
                     max = viewText.lastIndexOf(find_text);
-                    for(int k=0; ; k++)
+                    for(int k=0; k < max; k++)
                     {
                         fi = viewText.indexOf(find_text, fi);
                         try
@@ -213,7 +204,7 @@ public class EditController extends JFrame implements ActionListener {
                             CanNotSearch.printStackTrace();
                         }
                         fi = fi + find_text.length();
-                        if(fi >= max) break;
+                        if(fi >= max + 1) break;
                     }
                 }
                 else
@@ -269,7 +260,7 @@ public class EditController extends JFrame implements ActionListener {
                     } catch (BadLocationException ble) {
                     }
                     cpos = cpos+ conversion_word.length();
-                    if(cpos >= max2)
+                    if(cpos >= max2 + 1)
                         break;
                 }
             }

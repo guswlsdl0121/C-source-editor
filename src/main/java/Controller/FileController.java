@@ -22,6 +22,7 @@ public class FileController extends JFrame implements ActionListener {
     private final JTextPane pane = MainView.textPane;
     private String SavePathName = null;
 
+
     /**
      *  파일 불러오기에 관한 메소드
      * @param path 파일 경로
