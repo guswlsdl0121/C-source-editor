@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340b513-1cf6-4e07-9f1e-ed7dcff52f15" name="Changes" comment="초기 세팅">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/ChangeAllView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ChangeAllView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/ChangeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ChangeView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/SearchAllView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SearchAllView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/SearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SearchView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +31,24 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/정지수" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">

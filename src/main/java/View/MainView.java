@@ -71,7 +71,7 @@ public class MainView extends JFrame {
         Edit_Menu.add(Edit_Menu_search_Item);
         Edit_Menu_search_Item.addActionListener(new SearchViewEv());
 
-        JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
+        JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("SearchALL   Ctrl+G");
         Edit_Menu.add(Edit_Menu_ALLsearch_Item);
         Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
 
@@ -79,7 +79,7 @@ public class MainView extends JFrame {
         Edit_Menu.add(Edit_Menu_change_Item);
         Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
 
-        JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
+        JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALL   Ctrl+T");
         Edit_Menu.add(Edit_Menu_ALLchange_Item);
         Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
 
