@@ -1,5 +1,11 @@
 package View;
 
+import Controller.FileController;
+import Controller.InputController;
+
+import Controller.EditController;
+import Controller.FileController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,22 +19,22 @@ import javax.swing.undo.UndoManager;
 
 
 public class MainView extends JFrame {
-    private JFrame fce = new JFrame();
-    static JTextPane textPane = new JTextPane();
+    public static JTextPane textPane = new JTextPane();
+    private final InputController ic = new InputController(textPane);
 
-    private Highlighter h = textPane.getHighlighter();
-
-    private JLabel la = new JLabel("");
-    private JLabel la2 = new JLabel("");
-    private StatusThread st = new StatusThread();
+    private final JLabel la = new JLabel("");
+    private final JLabel la2 = new JLabel("");
+    private final StatusThread st = new StatusThread();
 
     public MainView() {
         setLayout(null);
-        fce.setTitle("C 소스 편집기");
-        fce.setSize(1080, 720);
-        fce.setLocation(100, 50);
-        fce.setDefaultCloseOperation(fce.EXIT_ON_CLOSE);
-        Container c = fce.getContentPane();
+        JFrame jFrame = new JFrame();
+
+        jFrame.setTitle("C 소스 편집기");
+        jFrame.setSize(1080, 720);
+        jFrame.setLocation(100, 50);
+        jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
+        Container c = jFrame.getContentPane();
         c.setLayout(null);
         JScrollPane scrollPane = new JScrollPane(textPane);
         scrollPane.setSize(800, 500);
@@ -43,44 +49,104 @@ public class MainView extends JFrame {
         c.add(la2);
 
         JMenuBar menuBar = new JMenuBar();
-        fce.setJMenuBar(menuBar);
+        jFrame.setJMenuBar(menuBar);
 
-        JMenu menu1 = new JMenu("File");
-        menuBar.add(menu1);
+        JMenu fileMenu = new JMenu("File");
+        menuBar.add(fileMenu);
 
-        JMenu Edit_Menu = new JMenu("Edit");
-        menuBar.add(Edit_Menu);
+        JMenu editMenu = new JMenu("Edit");
+        menuBar.add(editMenu);
 
-        fce.setVisible(true);
+        jFrame.setVisible(true);
 
-        JMenuItem menu1Item = new JMenuItem("NewFile   Ctrl+N");
-        menu1.add(menu1Item);
+        JMenuItem newItem = new JMenuItem("NewFile    Ctrl+N");
+        fileMenu.add(newItem);
 
-        JMenuItem menu2Item = new JMenuItem("LoadFile   Ctrl+O");
-        menu1.add(menu2Item);
+        JMenuItem loadItem = new JMenuItem("LoadFile   Ctrl+O");
+        fileMenu.add(loadItem);
 
-        JMenuItem menu3Item = new JMenuItem("SaveFile   Ctrl+S");
-        menu1.add(menu3Item);
+        JMenuItem saveItem = new JMenuItem("SaveFile   Ctrl+S");
+        fileMenu.add(saveItem);
 
-        JMenuItem menu4Item = new JMenuItem("ExitFile   Ctrl+Q");
-        menu1.add(menu4Item);
+        JMenuItem exitItem = new JMenuItem("ExitFile   Ctrl+Q");
+        fileMenu.add(exitItem);
+
+        //파일 메뉴 액션 리스너 등록
+        FileController fc = new FileController();
+        newItem.addActionListener(fc);
+        loadItem.addActionListener(fc);
+        saveItem.addActionListener(fc);
+        exitItem.addActionListener(fc);
+
+        //파일 메뉴 단축키 리스너 등록
+        textPane.addKeyListener(fc.new FileHotkeyListener());
+//        textPane.addKeyListener(ic.new ThreadStopListener());
+
+        //에딧메뉴 단축키 리스너 등록
+        textPane.addKeyListener(new EditController.MykeyListener());
+
+        EditController ed = new EditController();
+
+
+//        JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
+//        editMenu.add(Edit_Menu_search_Item);
+//        Edit_Menu_search_Item.addActionListener(new SearchViewEv());
+//
+//        JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
+//        editMenu.add(Edit_Menu_ALLsearch_Item);
+//        Edit_Menu_ALLsearch_Item.addActionListener(new SearchAllViewEv());
+//
+//        JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
+//        editMenu.add(Edit_Menu_change_Item);
+//        Edit_Menu_change_Item.addActionListener(new ChangeViewEv());
+//
+//        JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
+//        editMenu.add(Edit_Menu_ALLchange_Item);
+//        Edit_Menu_ALLchange_Item.addActionListener(new ChangeAllViewEv());
 
         JMenuItem Edit_Menu_search_Item = new JMenuItem("Search   Ctrl+F");
-        Edit_Menu.add(Edit_Menu_search_Item);
+        editMenu.add(Edit_Menu_search_Item);
 
         JMenuItem Edit_Menu_ALLsearch_Item = new JMenuItem("searchALL   Ctrl+G");
-        Edit_Menu.add(Edit_Menu_ALLsearch_Item);
+        editMenu.add(Edit_Menu_ALLsearch_Item);
 
         JMenuItem Edit_Menu_change_Item = new JMenuItem("Change   Ctrl+R");
-        Edit_Menu.add(Edit_Menu_change_Item);
+        editMenu.add(Edit_Menu_change_Item);
 
         JMenuItem Edit_Menu_ALLchange_Item = new JMenuItem("ChangeALl   Ctrl+T");
-        Edit_Menu.add(Edit_Menu_ALLchange_Item);
+        editMenu.add(Edit_Menu_ALLchange_Item);
 
+        Edit_Menu_search_Item.addActionListener(ed);
+        Edit_Menu_ALLsearch_Item.addActionListener(ed);
+        Edit_Menu_change_Item.addActionListener(ed);
+        Edit_Menu_ALLchange_Item.addActionListener(ed);
+
+        StatusThread st = new StatusThread();
         st.start();
 
     }
 
+//    class SearchViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            SearchView searchView = new SearchView();
+//        }
+//    }
+//    class SearchAllViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            SearchAllView searchAllView = new SearchAllView();
+//
+//        }
+//    }
+//    class ChangeViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            ChangeView changeView = new ChangeView();
+//        }
+//    }
+//    class ChangeAllViewEv implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            ChangeAllView changeAllView = new ChangeAllView();
+//        }
+//    }
 
     class StatusThread extends Thread {
         public void run() {
